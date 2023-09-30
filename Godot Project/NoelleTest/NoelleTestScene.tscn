@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8mgrbpeuc2ry"]
+
+[ext_resource type="Script" path="res://NoelleTest/MainCamera.gd" id="1_i324p"]
+
+[node name="NoelleTestScene" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(128, 112)
+script = ExtResource("1_i324p")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = 155.0
+offset_top = 130.0
+offset_right = 250.0
+offset_bottom = 218.0
+text = "Testing"

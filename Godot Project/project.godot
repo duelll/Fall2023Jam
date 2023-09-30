@@ -11,8 +11,15 @@ config_version=5
 [application]
 
 config/name="Fall2023Jam"
+run/main_scene="res://NoelleTest/NoelleTestScene.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=256
+window/size/viewport_height=224
+window/stretch/mode="viewport"
 
 [dotnet]
 
