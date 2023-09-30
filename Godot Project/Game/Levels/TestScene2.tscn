@@ -1,7 +1,83 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgy7t7ok7dqeh"]
+[gd_scene load_steps=10 format=3 uid="uid://cgy7t7ok7dqeh"]
 
-[ext_resource type="PackedScene" uid="uid://d18tr4esofqrk" path="res://Game/OtherScenes/main_camera.tscn" id="1_3y185"]
+[ext_resource type="Script" path="res://Game/Scripts/MainCamera.gd" id="1_15yas"]
+[ext_resource type="Script" path="res://Game/Scripts/PlayerMovement.gd" id="2_6un2w"]
+[ext_resource type="PackedScene" uid="uid://b4355rvbnesde" path="res://Game/OtherScenes/player_bullet.tscn" id="3_bpyd7"]
+[ext_resource type="Texture2D" uid="uid://dqbbx5iitsdg6" path="res://Game/Sprites/SpaceShipAsset.png" id="4_vw11g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2sxjj"]
+size = Vector2(14, 3)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qor5w"]
+a = Vector2(126, -1)
+b = Vector2(-132, -1)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_g663k"]
+a = Vector2(136, 16)
+b = Vector2(-121, 16)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_jb1uu"]
+a = Vector2(3, -127)
+b = Vector2(3, 97)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_kt2lq"]
+a = Vector2(-4, -110)
+b = Vector2(-4, 112)
 
 [node name="TestScene2" type="Node2D"]
 
-[node name="MainCamera" parent="." instance=ExtResource("1_3y185")]
+[node name="MainCamera" type="Camera2D" parent="."]
+position = Vector2(128, 112)
+script = ExtResource("1_15yas")
+scroll_speed = 0.2
+
+[node name="Player" type="CharacterBody2D" parent="MainCamera"]
+position = Vector2(12, -1)
+script = ExtResource("2_6un2w")
+player_bullet = ExtResource("3_bpyd7")
+
+[node name="PlayerHurtbox" type="CollisionShape2D" parent="MainCamera/Player"]
+z_index = 1
+position = Vector2(14, -3.5)
+shape = SubResource("RectangleShape2D_2sxjj")
+debug_color = Color(0.0941176, 0.643137, 0.203922, 0.419608)
+
+[node name="PlayerSprite" type="Sprite2D" parent="MainCamera/Player"]
+texture_filter = 3
+position = Vector2(15.0441, -3.4787)
+rotation = 1.5708
+texture = ExtResource("4_vw11g")
+region_enabled = true
+region_rect = Rect2(0, 0, 17, 17)
+
+[node name="FrontBarrel" type="Marker2D" parent="MainCamera/Player"]
+position = Vector2(28, -3)
+
+[node name="Camera Boundary" type="CanvasGroup" parent="MainCamera"]
+position = Vector2(132, -2)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="MainCamera/Camera Boundary" groups=["camera_boundary"]]
+position = Vector2(-129, 114)
+
+[node name="SouthWall" type="CollisionShape2D" parent="MainCamera/Camera Boundary/StaticBody2D"]
+position = Vector2(1, 0)
+shape = SubResource("SegmentShape2D_qor5w")
+
+[node name="NorthWall" type="CollisionShape2D" parent="MainCamera/Camera Boundary/StaticBody2D"]
+position = Vector2(-10, -240)
+shape = SubResource("SegmentShape2D_g663k")
+
+[node name="WestWall" type="CollisionShape2D" parent="MainCamera/Camera Boundary/StaticBody2D"]
+position = Vector2(-134, -97)
+shape = SubResource("SegmentShape2D_jb1uu")
+
+[node name="EastWall" type="CollisionShape2D" parent="MainCamera/Camera Boundary/StaticBody2D"]
+position = Vector2(129, -113)
+shape = SubResource("SegmentShape2D_kt2lq")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = 40.0
+offset_top = 55.0
+offset_right = 94.0
+offset_bottom = 109.0
+text = "Test"
