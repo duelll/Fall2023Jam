@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://b4355rvbnesde"]
 
-[ext_resource type="Script" path="res://NoelleTest/PlayerBulletScript.gd" id="1_iy3en"]
-[ext_resource type="Texture2D" uid="uid://dqbbx5iitsdg6" path="res://NoelleTest/SpaceShipAsset.png" id="2_evc5s"]
+[ext_resource type="Script" path="res://Game/Scripts/PlayerBulletScript.gd" id="1_1su6p"]
+[ext_resource type="Texture2D" uid="uid://dqbbx5iitsdg6" path="res://Game/Sprites/SpaceShipAsset.png" id="2_6ekqx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0xgv3"]
 radius = 1.0
 height = 10.0
 
 [node name="PlayerBullet" type="Area2D" groups=["player_bullets"]]
-script = ExtResource("1_iy3en")
+script = ExtResource("1_1su6p")
 speed = 300
 
 [node name="BulletHitbox" type="CollisionShape2D" parent="."]
@@ -21,7 +21,7 @@ texture_filter = 1
 position = Vector2(2, 0)
 rotation = 1.5708
 scale = Vector2(0.194017, 0.776855)
-texture = ExtResource("2_evc5s")
+texture = ExtResource("2_6ekqx")
 region_enabled = true
 region_rect = Rect2(17, 20, 18, 18)
 

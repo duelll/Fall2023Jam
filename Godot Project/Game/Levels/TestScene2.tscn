@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgy7t7ok7dqeh"]
+
+[ext_resource type="PackedScene" uid="uid://d18tr4esofqrk" path="res://Game/OtherScenes/main_camera.tscn" id="1_3y185"]
+
+[node name="TestScene2" type="Node2D"]
+
+[node name="MainCamera" parent="." instance=ExtResource("1_3y185")]

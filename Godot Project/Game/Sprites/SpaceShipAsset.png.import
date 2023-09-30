@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqbbx5iitsdg6"
-path="res://.godot/imported/SpaceShipAsset.png-c1e0b6a57ad01f1d35f972c7c780ddcf.ctex"
+path="res://.godot/imported/SpaceShipAsset.png-0ab1adf208a6b125dd31d807134e4268.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://NoelleTest/SpaceShipAsset.png"
-dest_files=["res://.godot/imported/SpaceShipAsset.png-c1e0b6a57ad01f1d35f972c7c780ddcf.ctex"]
+source_file="res://Game/Sprites/SpaceShipAsset.png"
+dest_files=["res://.godot/imported/SpaceShipAsset.png-0ab1adf208a6b125dd31d807134e4268.ctex"]
 
 [params]
 
