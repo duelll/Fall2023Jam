@@ -1,6 +1,6 @@
 extends Camera2D
 
-var scroll_speed
+@export var scroll_speed = 0.5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,4 +11,4 @@ func _process(delta):
 	horizontal_scroll()
 	
 func horizontal_scroll():
-	position.x += 0.5
+	position.x += scroll_speed

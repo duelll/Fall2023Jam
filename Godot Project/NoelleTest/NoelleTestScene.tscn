@@ -1,12 +1,34 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8mgrbpeuc2ry"]
+[gd_scene load_steps=5 format=3 uid="uid://b8mgrbpeuc2ry"]
 
 [ext_resource type="Script" path="res://NoelleTest/MainCamera.gd" id="1_i324p"]
+[ext_resource type="Script" path="res://NoelleTest/PlayerMovement.gd" id="2_a0l8o"]
+[ext_resource type="Shape2D" uid="uid://fk2lj85nrb87" path="res://NoelleTest/TestColliderShape.tres" id="2_hiuxk"]
+[ext_resource type="Texture2D" uid="uid://dqbbx5iitsdg6" path="res://NoelleTest/SpaceShipAsset.png" id="3_amoxn"]
 
 [node name="NoelleTestScene" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(128, 112)
 script = ExtResource("1_i324p")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Camera2D"]
+position = Vector2(9, 0)
+script = ExtResource("2_a0l8o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/CharacterBody2D"]
+z_index = 1
+position = Vector2(15.478, -0.780052)
+shape = ExtResource("2_hiuxk")
+debug_color = Color(0.0941176, 0.643137, 0.203922, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/CharacterBody2D"]
+texture_filter = 1
+position = Vector2(16.478, -0.78006)
+rotation = -1.57079
+scale = Vector2(1.20234, -1.82094)
+texture = ExtResource("3_amoxn")
+region_enabled = true
+region_rect = Rect2(0, 0, 17, 17)
 
 [node name="TextEdit" type="TextEdit" parent="."]
 offset_left = 155.0
