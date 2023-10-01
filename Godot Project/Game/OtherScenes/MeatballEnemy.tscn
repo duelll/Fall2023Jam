@@ -1,21 +1,21 @@
-[gd_scene load_steps=11 format=3 uid="uid://sgy7tqnup0hn"]
+[gd_scene load_steps=11 format=3 uid="uid://dj5jsfrjuishm"]
 
-[ext_resource type="Script" path="res://Game/Scripts/BulletEnemy.gd" id="1_rie6m"]
-[ext_resource type="PackedScene" uid="uid://bfj75i0gn5ick" path="res://Game/OtherScenes/enemy_bullet.tscn" id="2_yjaij"]
-[ext_resource type="Texture2D" uid="uid://br8fnqya4gq82" path="res://Game/Sprites/Space_Game_Enemy_Death_Sparks.png" id="3_lv0gd"]
-[ext_resource type="Texture2D" uid="uid://dn4b3m13uxaqq" path="res://Game/Sprites/SmallBulletEnemy.png" id="3_oktuo"]
-[ext_resource type="Script" path="res://Game/Scripts/SetAnimationDefault.gd" id="5_sujf6"]
+[ext_resource type="Script" path="res://Game/Scripts/BulletEnemy.gd" id="1_x72u4"]
+[ext_resource type="PackedScene" uid="uid://bfj75i0gn5ick" path="res://Game/OtherScenes/enemy_bullet.tscn" id="2_lup4h"]
+[ext_resource type="Texture2D" uid="uid://br8fnqya4gq82" path="res://Game/Sprites/Space_Game_Enemy_Death_Sparks.png" id="3_ynjsp"]
+[ext_resource type="Texture2D" uid="uid://dn4b3m13uxaqq" path="res://Game/Sprites/SmallBulletEnemy.png" id="4_qylmn"]
+[ext_resource type="Script" path="res://Game/Scripts/SetAnimationDefault.gd" id="5_drhb0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_02it4"]
-atlas = ExtResource("3_lv0gd")
+atlas = ExtResource("3_ynjsp")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ac6lk"]
-atlas = ExtResource("3_lv0gd")
+atlas = ExtResource("3_ynjsp")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_olpng"]
-atlas = ExtResource("3_oktuo")
+atlas = ExtResource("4_qylmn")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gn1wo"]
@@ -43,17 +43,17 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sylvt"]
 size = Vector2(15, 15)
 
-[node name="BulletEnemy" type="AnimatableBody2D" groups=["bullet_enemy", "capturable_enemies", "enemy_kill"]]
+[node name="BulletEnemy" type="AnimatableBody2D" groups=["enemy_kill"]]
 position = Vector2(100, -41)
-script = ExtResource("1_rie6m")
-enemy_bullet = ExtResource("2_yjaij")
+script = ExtResource("1_x72u4")
+enemy_bullet = ExtResource("2_lup4h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_gn1wo")
 animation = &"death"
-script = ExtResource("5_sujf6")
+script = ExtResource("5_drhb0")
 
 [node name="ShootLocation" type="Marker2D" parent="."]
 position = Vector2(13, 0)

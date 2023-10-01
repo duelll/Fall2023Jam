@@ -46,7 +46,7 @@ size = Vector2(15.5, 15.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ras1d"]
 size = Vector2(11, 12)
 
-[node name="MissileEnemy" type="AnimatableBody2D" groups=["enemy_kill"]]
+[node name="MissileEnemy" type="AnimatableBody2D" groups=["capturable_enemies", "enemy_kill", "missile_enemy"]]
 position = Vector2(100, -41)
 rotation = -3.14159
 script = ExtResource("1_j0pep")

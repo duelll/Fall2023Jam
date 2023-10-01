@@ -12,10 +12,7 @@ func _physics_process(delta):
 		queue_free()
 
 func _on_body_entered(body):
-	if(body.is_in_group("player")):
-		get_tree().reload_current_scene()
-	
-	explode()
+	pass
 
 func _on_animated_sprite_2d_animation_finished():
 	explode()

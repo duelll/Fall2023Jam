@@ -43,7 +43,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sylvt"]
 size = Vector2(15, 15)
 
-[node name="SpreadEnemy" type="AnimatableBody2D" groups=["enemy_kill"]]
+[node name="SpreadEnemy" type="AnimatableBody2D" groups=["capturable_enemies", "enemy_kill", "spread_enemy"]]
 position = Vector2(100, -41)
 script = ExtResource("1_5y4ue")
 enemy_bullet = ExtResource("2_26c8j")
