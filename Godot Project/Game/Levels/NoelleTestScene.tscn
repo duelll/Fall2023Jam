@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://b8mgrbpeuc2ry"]
+[gd_scene load_steps=43 format=3 uid="uid://b8mgrbpeuc2ry"]
 
 [ext_resource type="Script" path="res://Game/Scripts/MainCamera.gd" id="1_aif8p"]
 [ext_resource type="Script" path="res://Game/Scripts/PlayerMovement.gd" id="2_d36fn"]
@@ -13,7 +13,6 @@
 [ext_resource type="Script" path="res://Game/Scripts/CapturePod.gd" id="10_ubmr3"]
 [ext_resource type="Texture2D" uid="uid://b0jlqam5mb5hv" path="res://Game/Sprites/CapturedShotFlip.png" id="11_5qvn7"]
 [ext_resource type="PackedScene" uid="uid://bgw6jol0dpw6a" path="res://Game/OtherScenes/spread_enemy.tscn" id="11_om6my"]
-[ext_resource type="PackedScene" uid="uid://yl7fqdqw5pyx" path="res://Game/OtherScenes/player_missile.tscn" id="11_upokc"]
 [ext_resource type="Texture2D" uid="uid://chv5t26w37ftw" path="res://Game/Sprites/Capsule.png" id="12_hyyso"]
 [ext_resource type="Texture2D" uid="uid://c70omh7nxlhn1" path="res://Game/Sprites/CaptureMissileFlip.png" id="13_ddh8a"]
 [ext_resource type="Texture2D" uid="uid://2cufaer4hxmo" path="res://Game/Sprites/CapturedSpreadFlip.png" id="14_3told"]
@@ -181,7 +180,7 @@ b = Vector2(3, 97)
 a = Vector2(-4, -110)
 b = Vector2(-4, 112)
 
-[node name="NoelleTestScene" type="Node2D"]
+[node name="NoelleTestScene2" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_limit_end = Vector2(1e+14, 0)
