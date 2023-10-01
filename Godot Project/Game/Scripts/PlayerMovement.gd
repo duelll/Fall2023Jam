@@ -3,13 +3,15 @@ extends CharacterBody2D
 @export var speed = 200
 @export var player_bullet : PackedScene
 @export var max_bullets = 3
+var can_move = true
 
 func _ready():
 	$AnimatedSprite2D.play("default")
 
 func _physics_process(delta):
-	get_input()
-	move_and_slide()
+	if can_move == true:
+		get_input()
+		move_and_slide()
 	
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -35,3 +37,9 @@ func actually_shoot():
 	owner.add_child(inst)
 	#inst.transform = $FrontBarrel.global_transform
 	inst.set_position($FrontBarrel.get_global_position())
+	
+func death():
+	can_move = false
+	$AnimatedSprite2D.play("death")
+	await $AnimatedSprite2D.animation_finished
+	get_tree().reload_current_scene()

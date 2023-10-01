@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://du8vn3waj17sp"]
+[gd_scene load_steps=55 format=3 uid="uid://du8vn3waj17sp"]
 
 [ext_resource type="Texture2D" uid="uid://5jhg57r0ucxj" path="res://Game/Sprites/Background.png" id="1_rpbm6"]
 [ext_resource type="Texture2D" uid="uid://x3nmwa00su81" path="res://Game/Sprites/StalaBottom.png" id="2_5ps5e"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Game/Scripts/PlayerMovement.gd" id="5_5420s"]
 [ext_resource type="PackedScene" uid="uid://b4355rvbnesde" path="res://Game/OtherScenes/player_bullet.tscn" id="6_vc33b"]
 [ext_resource type="Texture2D" uid="uid://cka5qepnme6bn" path="res://Game/Sprites/Space_Game_Ship-Sheet.png" id="7_ofiyc"]
+[ext_resource type="Texture2D" uid="uid://gxlv0cdfefg1" path="res://Game/Sprites/MechaGrind_Player_Death_.png" id="7_ypr4h"]
 [ext_resource type="Texture2D" uid="uid://cfwe5hltxu7n8" path="res://Game/Sprites/Space_Game_Ship_Right_Turn.png" id="8_n1eni"]
 [ext_resource type="Texture2D" uid="uid://dxj0gqfh08k6t" path="res://Game/Sprites/Space_Game_Ship_Left_Turn.png" id="9_gxay5"]
 [ext_resource type="Script" path="res://Game/Scripts/CapturePod.gd" id="10_hp2ar"]
@@ -25,6 +26,30 @@
 [ext_resource type="PackedScene" uid="uid://gkd8l7udo10q" path="res://Game/OtherScenes/drill_obstacle.tscn" id="23_nfumk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i1k0k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6kxe"]
+atlas = ExtResource("7_ypr4h")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unghh"]
+atlas = ExtResource("7_ypr4h")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esqg2"]
+atlas = ExtResource("7_ypr4h")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7faq"]
+atlas = ExtResource("7_ypr4h")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hro3p"]
+atlas = ExtResource("7_ypr4h")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_th5yi"]
+atlas = ExtResource("7_ypr4h")
+region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nhvma"]
 atlas = ExtResource("7_ofiyc")
@@ -64,6 +89,29 @@ region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5j37b"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6kxe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unghh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esqg2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7faq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hro3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_th5yi")
+}],
+"loop": false,
+"name": &"death",
+"speed": 6.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nhvma")
@@ -249,6 +297,8 @@ max_bullets = 2
 texture_filter = 1
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_5j37b")
+animation = &"death"
+script = ExtResource("15_rdgom")
 
 [node name="FrontBarrel" type="Marker2D" parent="MainCamera/Player"]
 position = Vector2(14, 2)
