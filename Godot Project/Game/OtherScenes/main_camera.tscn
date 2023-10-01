@@ -176,7 +176,7 @@ b = Vector2(-4, 112)
 
 [node name="MainCamera" type="Camera2D"]
 script = ExtResource("1_hwhi4")
-scroll_speed = 127.0
+scroll_speed = 27.0
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 position = Vector2(12, -1)

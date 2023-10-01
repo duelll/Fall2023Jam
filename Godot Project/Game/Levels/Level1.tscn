@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://du8vn3waj17sp"]
+[gd_scene load_steps=46 format=3 uid="uid://du8vn3waj17sp"]
 
 [ext_resource type="Texture2D" uid="uid://5jhg57r0ucxj" path="res://Game/Sprites/Background.png" id="1_rpbm6"]
 [ext_resource type="Texture2D" uid="uid://x3nmwa00su81" path="res://Game/Sprites/StalaBottom.png" id="2_5ps5e"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cfwe5hltxu7n8" path="res://Game/Sprites/Space_Game_Ship_Right_Turn.png" id="8_n1eni"]
 [ext_resource type="Texture2D" uid="uid://dxj0gqfh08k6t" path="res://Game/Sprites/Space_Game_Ship_Left_Turn.png" id="9_gxay5"]
 [ext_resource type="Script" path="res://Game/Levels/CapturePod.gd" id="10_xknon"]
+[ext_resource type="PackedScene" uid="uid://yl7fqdqw5pyx" path="res://Game/OtherScenes/player_missile.tscn" id="11_7o2xy"]
 [ext_resource type="Texture2D" uid="uid://b0jlqam5mb5hv" path="res://Game/Sprites/CapturedShotFlip.png" id="11_nyg3y"]
 [ext_resource type="Texture2D" uid="uid://chv5t26w37ftw" path="res://Game/Sprites/Capsule.png" id="12_htnb0"]
 [ext_resource type="Texture2D" uid="uid://c70omh7nxlhn1" path="res://Game/Sprites/CaptureMissileFlip.png" id="13_dw5vf"]
@@ -163,6 +164,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5il3"]
+size = Vector2(9, 11.5)
+
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qor5w"]
 a = Vector2(126, -1)
 b = Vector2(-132, -1)
@@ -221,13 +225,12 @@ texture = ExtResource("3_h43os")
 
 [node name="MainCamera" type="Camera2D" parent="."]
 script = ExtResource("4_ap1ai")
-scroll_speed = 0.4
+scroll_speed = 27.0
 
 [node name="Player" type="CharacterBody2D" parent="MainCamera" groups=["player"]]
 position = Vector2(12, -1)
 script = ExtResource("5_5420s")
 speed = 127
-bullet_speed = 200
 player_bullet = ExtResource("6_vc33b")
 max_bullets = 2
 
@@ -254,6 +257,8 @@ shape = SubResource("RectangleShape2D_6gon3")
 [node name="CapturePod" type="Area2D" parent="MainCamera/Player"]
 position = Vector2(7, 11)
 script = ExtResource("10_xknon")
+player_bullet = ExtResource("6_vc33b")
+player_missile = ExtResource("11_7o2xy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MainCamera/Player/CapturePod"]
 position = Vector2(4, 1)
@@ -266,8 +271,20 @@ sprite_frames = SubResource("SpriteFrames_37ogy")
 animation = &"spread"
 script = ExtResource("15_rdgom")
 
+[node name="CaptureTimer" type="Timer" parent="MainCamera/Player/CapturePod"]
+wait_time = 10.0
+
+[node name="BulletTimer" type="Timer" parent="MainCamera/Player/CapturePod"]
+wait_time = 0.5
+
 [node name="Marker2D" type="Marker2D" parent="MainCamera/Player/CapturePod"]
-position = Vector2(11, 5)
+position = Vector2(14, 0)
+
+[node name="PodShotLimitArea" type="Area2D" parent="MainCamera/Player" groups=["pod_limit"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainCamera/Player/PodShotLimitArea"]
+position = Vector2(51, 12)
+shape = SubResource("RectangleShape2D_h5il3")
 
 [node name="Camera Boundary" type="CanvasGroup" parent="MainCamera"]
 position = Vector2(132, -2)
@@ -398,4 +415,7 @@ position = Vector2(511, 34)
 [node name="Gear" parent="." instance=ExtResource("21_2amam")]
 position = Vector2(367, -1)
 
-[connection signal="body_entered" from="MainCamera/Player/CapturePod" to="MainCamera/Player/CapturePod" method="_on_body_entered"]
+[connection signal="area_entered" from="MainCamera/Player/CapturePod" to="MainCamera/Player/CapturePod" method="_on_area_entered" flags=18]
+[connection signal="body_entered" from="MainCamera/Player/CapturePod" to="MainCamera/Player/CapturePod" method="_on_body_entered" flags=18]
+[connection signal="timeout" from="MainCamera/Player/CapturePod/CaptureTimer" to="MainCamera/Player/CapturePod" method="_on_capture_timer_timeout" flags=18]
+[connection signal="timeout" from="MainCamera/Player/CapturePod/BulletTimer" to="MainCamera/Player/CapturePod" method="_on_bullet_timer_timeout" flags=18]

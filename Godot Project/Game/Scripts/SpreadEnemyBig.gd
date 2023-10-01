@@ -1,7 +1,7 @@
 extends AnimatableBody2D
 
 @export var enemy_bullet : PackedScene
-@export var health = 10
+@export var health = 7
 @onready var Player = get_parent().get_node("MainCamera").get_node("Player")
 
 # Called when the node enters the scene tree for the first time.
