@@ -85,6 +85,8 @@ func _on_area_entered(area):
 	if state == "shooting":
 		if area.is_in_group("pod_limit"):
 			state = "returning"
+	if area.is_in_group("win"):
+		get_tree().change_scene_to_file("res://Menus/EndScreen.tscn")
 
 func _on_capture_timer_timeout():
 	state = "idle"
