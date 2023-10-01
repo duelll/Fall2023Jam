@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://bb40g2elw3ltq"]
+
+[ext_resource type="Script" path="res://Menus/credits.gd" id="1_pnsj8"]
+[ext_resource type="Texture2D" uid="uid://dy00rh4tkghc7" path="res://Game/Sprites/TitleScreen.png" id="1_poasj"]
+[ext_resource type="Texture2D" uid="uid://1ltxybslfmt" path="res://Game/Sprites/MechaGrind_Back_Button.png" id="3_ij4wq"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pnsj8")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_poasj")
+
+[node name="TextEdit" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 57.0
+offset_right = 85.0
+offset_bottom = 142.0
+text = "Program:
+Duel 
+Noelle"
+
+[node name="TextEdit2" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 60.0
+offset_right = 261.0
+offset_bottom = 142.0
+text = "Art:
+Garrett
+Lakota"
+
+[node name="TextEdit3" type="RichTextLabel" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 58.0
+offset_top = 90.0
+offset_right = 257.0
+offset_bottom = 321.0
+scale = Vector2(0.665054, 0.56301)
+text = "This game uses Godot Engine, available under the following license:
+
+    Copyright (c) 2014-present Godot Engine contributors. Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 189.0
+offset_right = 238.0
+offset_bottom = 213.0
+icon = ExtResource("3_ij4wq")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

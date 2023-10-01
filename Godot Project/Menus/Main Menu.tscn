@@ -1,7 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvr2v2o8qgiu0"]
+[gd_scene load_steps=6 format=3 uid="uid://bvr2v2o8qgiu0"]
 
 [ext_resource type="Script" path="res://Menus/Main Menu.gd" id="1_y8b1a"]
-
+[ext_resource type="Texture2D" uid="uid://b12jmmoctapfq" path="res://Game/Sprites/PlayButton.png" id="2_qpehy"]
+[ext_resource type="Texture2D" uid="uid://btsd864qg1ooa" path="res://Game/Sprites/CreditButton.png" id="3_a6ob8"]
+[ext_resource type="Texture2D" uid="uid://dy00rh4tkghc7" path="res://Game/Sprites/TitleScreen.png" id="4_v8clg"]
+[ext_resource type="Texture2D" uid="uid://br4plfjvsr0bl" path="res://Game/Sprites/Quit.png" id="5_4tb8k"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -14,19 +17,49 @@ script = ExtResource("1_y8b1a")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 10.0
+offset_top = 67.0
+offset_right = 114.0
+offset_bottom = 213.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Play"
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -2
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_v8clg")
 
-[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Play" type="Button" parent="."]
+texture_filter = 1
 layout_mode = 2
-text = "Quit"
+offset_left = 11.0
+offset_top = 65.0
+offset_right = 115.0
+offset_bottom = 128.0
+icon = ExtResource("2_qpehy")
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[node name="Credits" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 2
+offset_left = 148.0
+offset_top = 57.0
+offset_right = 252.0
+offset_bottom = 136.0
+icon = ExtResource("3_a6ob8")
+
+[node name="Quit" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 2
+offset_left = 102.0
+offset_top = 136.0
+offset_right = 154.0
+offset_bottom = 189.0
+icon = ExtResource("5_4tb8k")
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
