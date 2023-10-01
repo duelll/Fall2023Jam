@@ -25,7 +25,7 @@ func actually_shoot():
 	#inst.transform = $FrontBarrel.global_transform
 	inst.set_position($ShootLocation.get_global_position())
 	inst.rotation = rotation
-	
 
-
-
+func _on_area_2d_body_entered(body):
+	if(body.is_in_group("player")):
+		get_tree().reload_current_scene()

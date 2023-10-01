@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8mgrbpeuc2ry"]
+[gd_scene load_steps=26 format=3 uid="uid://b8mgrbpeuc2ry"]
 
 [ext_resource type="Script" path="res://Game/Scripts/MainCamera.gd" id="1_aif8p"]
 [ext_resource type="Script" path="res://Game/Scripts/PlayerMovement.gd" id="2_d36fn"]
@@ -6,8 +6,91 @@
 [ext_resource type="Texture2D" uid="uid://m0jqrrv1exij" path="res://Game/Sprites/StalaTop.png" id="3_mlveg"]
 [ext_resource type="PackedScene" uid="uid://b4355rvbnesde" path="res://Game/OtherScenes/player_bullet.tscn" id="3_wws5s"]
 [ext_resource type="Texture2D" uid="uid://cka5qepnme6bn" path="res://Game/Sprites/Space_Game_Ship-Sheet.png" id="4_0bhhw"]
-[ext_resource type="PackedScene" uid="uid://sgy7tqnup0hn" path="res://bullet_enemy.tscn" id="5_3y8n8"]
+[ext_resource type="PackedScene" uid="uid://sgy7tqnup0hn" path="res://Game/OtherScenes/bullet_enemy.tscn" id="5_3y8n8"]
 [ext_resource type="Texture2D" uid="uid://5jhg57r0ucxj" path="res://Game/Sprites/Background.png" id="6_d3s0n"]
+[ext_resource type="Texture2D" uid="uid://cfwe5hltxu7n8" path="res://Game/Sprites/Space_Game_Ship_Right_Turn.png" id="8_a5udu"]
+[ext_resource type="Texture2D" uid="uid://dxj0gqfh08k6t" path="res://Game/Sprites/Space_Game_Ship_Left_Turn.png" id="9_4skk1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhvma"]
+atlas = ExtResource("4_0bhhw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfbft"]
+atlas = ExtResource("4_0bhhw")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhlpc"]
+atlas = ExtResource("4_0bhhw")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4md4"]
+atlas = ExtResource("8_a5udu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txvf8"]
+atlas = ExtResource("8_a5udu")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tck3v"]
+atlas = ExtResource("8_a5udu")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3ttr"]
+atlas = ExtResource("9_4skk1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpjle"]
+atlas = ExtResource("9_4skk1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocu42"]
+atlas = ExtResource("9_4skk1")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5j37b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhvma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfbft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhlpc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a4md4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txvf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tck3v")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3ttr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpjle")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocu42")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2sxjj"]
 size = Vector2(14, 6)
@@ -34,6 +117,7 @@ b = Vector2(-4, 112)
 scroll_limit_end = Vector2(1e+14, 0)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+z_index = -2
 motion_scale = Vector2(0.25, 1)
 motion_mirroring = Vector2(256, 0)
 
@@ -44,18 +128,23 @@ texture_repeat = 2
 position = Vector2(128, 0)
 texture = ExtResource("6_d3s0n")
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+layer = 100
+scroll_limit_end = Vector2(1e+14, 0)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground2"]
+z_index = 1
 motion_mirroring = Vector2(256, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-z_index = -2
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer2"]
+z_index = 1
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(129, 105)
 texture = ExtResource("3_l2mlq")
 
-[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-z_index = -2
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer2"]
+z_index = 1
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(129, -111)
@@ -65,27 +154,25 @@ texture = ExtResource("3_mlveg")
 script = ExtResource("1_aif8p")
 scroll_speed = 0.2
 
-[node name="Player" type="CharacterBody2D" parent="MainCamera"]
+[node name="Player" type="CharacterBody2D" parent="MainCamera" groups=["player"]]
 position = Vector2(12, -1)
 script = ExtResource("2_d36fn")
+speed = 150
 player_bullet = ExtResource("3_wws5s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MainCamera/Player"]
+texture_filter = 1
+position = Vector2(0, 1)
+sprite_frames = SubResource("SpriteFrames_5j37b")
+
+[node name="FrontBarrel" type="Marker2D" parent="MainCamera/Player"]
+position = Vector2(14, 2)
 
 [node name="PlayerHurtbox" type="CollisionShape2D" parent="MainCamera/Player"]
 z_index = 1
 position = Vector2(-2, 2)
 shape = SubResource("RectangleShape2D_2sxjj")
 debug_color = Color(0.0941176, 0.643137, 0.203922, 0.419608)
-
-[node name="PlayerSprite" type="Sprite2D" parent="MainCamera/Player"]
-texture_filter = 3
-position = Vector2(-1, 2)
-texture = ExtResource("4_0bhhw")
-hframes = 3
-frame = 2
-region_rect = Rect2(0, 0, 17, 17)
-
-[node name="FrontBarrel" type="Marker2D" parent="MainCamera/Player"]
-position = Vector2(14, 2)
 
 [node name="Camera Boundary" type="CanvasGroup" parent="MainCamera"]
 position = Vector2(132, -2)
