@@ -1,12 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfj75i0gn5ick"]
+[gd_scene load_steps=12 format=3 uid="uid://bfj75i0gn5ick"]
 
-[ext_resource type="Script" path="res://Game/Scripts/enemy_bullet.gd" id="1_cojoj"]
+[ext_resource type="Script" path="res://Game/Scripts/EnemyBullet.gd" id="1_2in24"]
 [ext_resource type="Texture2D" uid="uid://c58tu2ov6jiaf" path="res://Game/Sprites/Space_Game_Bullet.png" id="2_fbrcu"]
-[ext_resource type="Script" path="res://Game/Scripts/BulletSprite.gd" id="3_v6wrl"]
+[ext_resource type="Texture2D" uid="uid://6nkp7vmlg536" path="res://Game/Sprites/Space_Game_Bullet_Blue2.png" id="2_u2q0k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0xgv3"]
 radius = 2.0
 height = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1qxj"]
+atlas = ExtResource("2_u2q0k")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afkkv"]
+atlas = ExtResource("2_u2q0k")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwgm1"]
+atlas = ExtResource("2_u2q0k")
+region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_utarp"]
 atlas = ExtResource("2_fbrcu")
@@ -24,6 +36,20 @@ region = Rect2(32, 0, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_m1qxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_afkkv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwgm1")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_utarp")
 }, {
 "duration": 1.0,
@@ -33,12 +59,12 @@ animations = [{
 "texture": SubResource("AtlasTexture_lb305")
 }],
 "loop": true,
-"name": &"default",
+"name": &"pink",
 "speed": 5.0
 }]
 
 [node name="EnemyBullet" type="Area2D" groups=["enemy_bullets", "player_kill"]]
-script = ExtResource("1_cojoj")
+script = ExtResource("1_2in24")
 
 [node name="BulletHitbox" type="CollisionShape2D" parent="." groups=["player_kill"]]
 position = Vector2(1, 0)
@@ -53,8 +79,6 @@ scale = Vector2(0.65, 0.3)
 texture_filter = 1
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_spjsm")
-frame = 1
-frame_progress = 0.639413
-script = ExtResource("3_v6wrl")
+animation = &"blue"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

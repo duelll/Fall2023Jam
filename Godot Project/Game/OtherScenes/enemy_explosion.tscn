@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://ccfha5hedhwxb"]
+
+[ext_resource type="Script" path="res://Game/Scripts/EnemyExplosion.gd" id="1_fi6yu"]
+[ext_resource type="Texture2D" uid="uid://cptepfe4npmv0" path="res://Game/Sprites/ExplosionSpriteSheet.png" id="2_wvmno"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7j3f"]
+atlas = ExtResource("2_wvmno")
+region = Rect2(396, 0, 99, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12m7o"]
+atlas = ExtResource("2_wvmno")
+region = Rect2(297, 0, 99, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8jgo"]
+atlas = ExtResource("2_wvmno")
+region = Rect2(198, 0, 99, 101)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_spjsm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7j3f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12m7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8jgo")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0xgv3"]
+radius = 27.0
+height = 72.0
+
+[node name="enemy_explosion" type="Area2D" groups=["enemy_bullets", "player_kill"]]
+script = ExtResource("1_fi6yu")
+
+[node name="ScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2, 2.98023e-07)
+scale = Vector2(0.8, 0.6)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_spjsm")
+frame = 1
+frame_progress = 0.180622
+
+[node name="BulletHitbox" type="CollisionShape2D" parent="." groups=["player_kill"]]
+position = Vector2(-6, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_0xgv3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

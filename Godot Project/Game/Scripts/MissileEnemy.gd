@@ -1,6 +1,6 @@
 extends AnimatableBody2D
 
-@export var enemy_bullet : PackedScene
+@export var enemy_missile : PackedScene
 @export var health = 1
 @onready var Player = get_parent().get_node("MainCamera").get_node("Player")
 
@@ -10,9 +10,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var a = position.direction_to(Player.global_position).angle()
-	rotation = snapped(a, PI/4)
-	
 	if (health < 1):
 		$AnimatedSprite2D.play("death")
 		await $AnimatedSprite2D.animation_finished
@@ -25,10 +22,9 @@ func shoot():
 	actually_shoot()
 	
 func actually_shoot():
-	var inst = enemy_bullet.instantiate()
+	var inst = enemy_missile.instantiate()
 	owner.add_child(inst)
 	inst.speed = 50
-	inst.color = "pink"
 	#inst.transform = $FrontBarrel.global_transform
 	inst.set_position($ShootLocation.get_global_position())
 	inst.rotation = rotation

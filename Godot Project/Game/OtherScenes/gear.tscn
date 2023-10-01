@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://cvn7og7jcwte1"]
+
+[ext_resource type="Texture2D" uid="uid://gbi68y6knke0" path="res://Game/Sprites/MechaGrind_Mega_Gear.png" id="1_2hyyp"]
+[ext_resource type="Script" path="res://Game/Scripts/Obstacle.gd" id="1_88wnt"]
+[ext_resource type="Script" path="res://Game/Scripts/GearSprite.gd" id="2_3c45o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p3arb"]
+size = Vector2(17, 20.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4y6uw"]
+atlas = ExtResource("1_2hyyp")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lon1b"]
+atlas = ExtResource("1_2hyyp")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mq5y"]
+atlas = ExtResource("1_2hyyp")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xmtf8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4y6uw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lon1b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mq5y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Gear" type="StaticBody2D"]
+script = ExtResource("1_88wnt")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(128, 94)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 3.25)
+shape = SubResource("RectangleShape2D_p3arb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(128, 99)
+sprite_frames = SubResource("SpriteFrames_xmtf8")
+script = ExtResource("2_3c45o")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(129.5, 99.5)
+shape = SubResource("RectangleShape2D_p3arb")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

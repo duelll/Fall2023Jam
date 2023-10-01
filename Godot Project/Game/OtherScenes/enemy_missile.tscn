@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://dw8k4kjg8uyqy"]
+
+[ext_resource type="Script" path="res://Game/Scripts/EnemyMissile.gd" id="1_s6dus"]
+[ext_resource type="PackedScene" uid="uid://ccfha5hedhwxb" path="res://Game/OtherScenes/enemy_explosion.tscn" id="2_glt3d"]
+[ext_resource type="Texture2D" uid="uid://vlnt7rlc74i7" path="res://Game/Sprites/Space_Game_Missile.png" id="2_qw8v4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykdd7"]
+atlas = ExtResource("2_qw8v4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ib5kr"]
+atlas = ExtResource("2_qw8v4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tqwv"]
+atlas = ExtResource("2_qw8v4")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_veakr"]
+atlas = ExtResource("2_qw8v4")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_spjsm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykdd7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ib5kr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8tqwv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_veakr")
+}],
+"loop": false,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0xgv3"]
+radius = 4.0
+height = 14.0
+
+[node name="EnemyMissile" type="Area2D" groups=["enemy_bullets", "player_kill"]]
+script = ExtResource("1_s6dus")
+enemy_explosion = ExtResource("2_glt3d")
+
+[node name="ScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2, 2.98023e-07)
+scale = Vector2(0.8, 0.6)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_spjsm")
+
+[node name="BulletHitbox" type="CollisionShape2D" parent="." groups=["player_kill"]]
+position = Vector2(2, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_0xgv3")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(1, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

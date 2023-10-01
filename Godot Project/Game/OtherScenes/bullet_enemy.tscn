@@ -1,21 +1,59 @@
-[gd_scene load_steps=5 format=3 uid="uid://sgy7tqnup0hn"]
+[gd_scene load_steps=11 format=3 uid="uid://sgy7tqnup0hn"]
 
 [ext_resource type="Script" path="res://Game/Scripts/BulletEnemy.gd" id="1_rie6m"]
 [ext_resource type="PackedScene" uid="uid://bfj75i0gn5ick" path="res://Game/OtherScenes/enemy_bullet.tscn" id="2_yjaij"]
+[ext_resource type="Texture2D" uid="uid://br8fnqya4gq82" path="res://Game/Sprites/Space_Game_Enemy_Death_Sparks.png" id="3_lv0gd"]
 [ext_resource type="Texture2D" uid="uid://dn4b3m13uxaqq" path="res://Game/Sprites/SmallBulletEnemy.png" id="3_oktuo"]
+[ext_resource type="Script" path="res://Game/Scripts/SetAnimationDefault.gd" id="5_sujf6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02it4"]
+atlas = ExtResource("3_lv0gd")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ac6lk"]
+atlas = ExtResource("3_lv0gd")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olpng"]
+atlas = ExtResource("3_oktuo")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gn1wo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02it4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ac6lk")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olpng")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sylvt"]
-size = Vector2(14, 14)
+size = Vector2(15, 15)
 
 [node name="BulletEnemy" type="AnimatableBody2D" groups=["enemy_kill"]]
 position = Vector2(100, -41)
 script = ExtResource("1_rie6m")
 enemy_bullet = ExtResource("2_yjaij")
 
-[node name="BulletEnemySprite" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 rotation = 3.14159
-texture = ExtResource("3_oktuo")
+sprite_frames = SubResource("SpriteFrames_gn1wo")
+animation = &"death"
+script = ExtResource("5_sujf6")
 
 [node name="ShootLocation" type="Marker2D" parent="."]
 position = Vector2(13, 0)
@@ -24,6 +62,7 @@ rotation = 3.14159
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="EnemyHitbox" type="CollisionShape2D" parent="Area2D" groups=["enemy_hitbox"]]
+position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_sylvt")
 
 [node name="Timer" type="Timer" parent="."]

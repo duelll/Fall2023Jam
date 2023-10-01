@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b8mgrbpeuc2ry"]
+[gd_scene load_steps=29 format=3 uid="uid://b8mgrbpeuc2ry"]
 
 [ext_resource type="Script" path="res://Game/Scripts/MainCamera.gd" id="1_aif8p"]
 [ext_resource type="Script" path="res://Game/Scripts/PlayerMovement.gd" id="2_d36fn"]
@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://5jhg57r0ucxj" path="res://Game/Sprites/Background.png" id="6_d3s0n"]
 [ext_resource type="Texture2D" uid="uid://cfwe5hltxu7n8" path="res://Game/Sprites/Space_Game_Ship_Right_Turn.png" id="8_a5udu"]
 [ext_resource type="Texture2D" uid="uid://dxj0gqfh08k6t" path="res://Game/Sprites/Space_Game_Ship_Left_Turn.png" id="9_4skk1"]
+[ext_resource type="PackedScene" uid="uid://bgw6jol0dpw6a" path="res://Game/OtherScenes/spread_enemy.tscn" id="11_om6my"]
+[ext_resource type="PackedScene" uid="uid://dr4was1w3x7a1" path="res://Game/OtherScenes/spread_enemy_big.tscn" id="14_ibo4m"]
+[ext_resource type="PackedScene" uid="uid://m8govf7lymjr" path="res://Game/OtherScenes/missile_enemy.tscn" id="15_x1d3y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nhvma"]
 atlas = ExtResource("4_0bhhw")
@@ -128,22 +131,23 @@ texture_repeat = 2
 position = Vector2(128, 0)
 texture = ExtResource("6_d3s0n")
 
-[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+[node name="ParallaxForeground" type="ParallaxBackground" parent="."]
 layer = 100
 scroll_limit_end = Vector2(1e+14, 0)
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground2"]
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxForeground"]
 z_index = 1
+motion_scale = Vector2(1.1, 1)
 motion_mirroring = Vector2(256, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer2"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxForeground/ParallaxLayer2"]
 z_index = 1
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(129, 105)
 texture = ExtResource("3_l2mlq")
 
-[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer2"]
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxForeground/ParallaxLayer2"]
 z_index = 1
 texture_filter = 1
 texture_repeat = 2
@@ -197,7 +201,16 @@ position = Vector2(129, -113)
 shape = SubResource("SegmentShape2D_kt2lq")
 
 [node name="BulletEnemy" parent="." instance=ExtResource("5_3y8n8")]
-position = Vector2(254, -45)
+position = Vector2(238, -40)
 
 [node name="BulletEnemy2" parent="." instance=ExtResource("5_3y8n8")]
-position = Vector2(255.425, 53.752)
+position = Vector2(241, 33)
+
+[node name="SpreadEnemy" parent="." instance=ExtResource("11_om6my")]
+position = Vector2(306, -12)
+
+[node name="SpreadEnemyBig" parent="." instance=ExtResource("14_ibo4m")]
+position = Vector2(386, 89)
+
+[node name="MissileEnemy" parent="." instance=ExtResource("15_x1d3y")]
+position = Vector2(396, -20)

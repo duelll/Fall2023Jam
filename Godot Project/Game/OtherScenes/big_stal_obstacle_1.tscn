@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://qlfmnpmog0lr"]
+
+[ext_resource type="Script" path="res://Game/Scripts/Obstacle.gd" id="1_ph6hl"]
+[ext_resource type="Texture2D" uid="uid://yua1bnubjp3j" path="res://Game/Sprites/BigCaveObstacle1.png" id="2_wuuqb"]
+
+[node name="BigStalObstacle1" type="StaticBody2D"]
+script = ExtResource("1_ph6hl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(129, 98)
+texture = ExtResource("2_wuuqb")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(128, 94)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-17, 7, -26, -27, 28, -28, 9, 12, 0, 33)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+position = Vector2(128, 94)
+polygon = PackedVector2Array(-15, 6, -24, -25, 25, -27, 8, 11, 0, 30)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
