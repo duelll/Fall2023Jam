@@ -21,6 +21,8 @@ func shoot():
 		actually_shoot()
 
 func actually_shoot():
-	var b = player_bullet.instantiate()
-	owner.add_child(b)
-	b.transform = $FrontBarrel.global_transform
+	for angle in [-0.3,0,0.3]:
+		var b = player_bullet.instantiate()
+		owner.add_child(b)
+		b.transform = $FrontBarrel.global_transform
+		b.rotation = get_parent().rotation + angle
