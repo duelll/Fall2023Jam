@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://b8mgrbpeuc2ry"]
+[gd_scene load_steps=44 format=3 uid="uid://b8mgrbpeuc2ry"]
 
 [ext_resource type="Script" path="res://Game/Scripts/MainCamera.gd" id="1_aif8p"]
 [ext_resource type="Script" path="res://Game/Scripts/PlayerMovement.gd" id="2_d36fn"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Game/Levels/CapturePod.gd" id="10_x6ski"]
 [ext_resource type="Texture2D" uid="uid://b0jlqam5mb5hv" path="res://Game/Sprites/CapturedShotFlip.png" id="11_5qvn7"]
 [ext_resource type="PackedScene" uid="uid://bgw6jol0dpw6a" path="res://Game/OtherScenes/spread_enemy.tscn" id="11_om6my"]
+[ext_resource type="PackedScene" uid="uid://yl7fqdqw5pyx" path="res://Game/OtherScenes/player_missile.tscn" id="11_upokc"]
 [ext_resource type="Texture2D" uid="uid://chv5t26w37ftw" path="res://Game/Sprites/Capsule.png" id="12_hyyso"]
 [ext_resource type="Texture2D" uid="uid://c70omh7nxlhn1" path="res://Game/Sprites/CaptureMissileFlip.png" id="13_ddh8a"]
 [ext_resource type="Texture2D" uid="uid://2cufaer4hxmo" path="res://Game/Sprites/CapturedSpreadFlip.png" id="14_3told"]
@@ -161,6 +162,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5il3"]
+size = Vector2(9, 11.5)
+
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qor5w"]
 a = Vector2(126, -1)
 b = Vector2(-132, -1)
@@ -219,13 +223,14 @@ texture = ExtResource("3_mlveg")
 
 [node name="MainCamera" type="Camera2D" parent="."]
 script = ExtResource("1_aif8p")
-scroll_speed = 0.2
+scroll_speed = 27.0
 
 [node name="Player" type="CharacterBody2D" parent="MainCamera" groups=["player"]]
 position = Vector2(12, -1)
 script = ExtResource("2_d36fn")
-speed = 150
+speed = 127
 player_bullet = ExtResource("3_wws5s")
+max_bullets = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MainCamera/Player"]
 texture_filter = 1
@@ -250,6 +255,8 @@ shape = SubResource("RectangleShape2D_6gon3")
 [node name="CapturePod" type="Area2D" parent="MainCamera/Player"]
 position = Vector2(7, 11)
 script = ExtResource("10_x6ski")
+player_bullet = ExtResource("3_wws5s")
+player_missile = ExtResource("11_upokc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MainCamera/Player/CapturePod"]
 position = Vector2(4, 1)
@@ -262,8 +269,20 @@ sprite_frames = SubResource("SpriteFrames_37ogy")
 animation = &"spread"
 script = ExtResource("15_cyc4g")
 
+[node name="CaptureTimer" type="Timer" parent="MainCamera/Player/CapturePod"]
+wait_time = 10.0
+
+[node name="BulletTimer" type="Timer" parent="MainCamera/Player/CapturePod"]
+wait_time = 0.5
+
 [node name="Marker2D" type="Marker2D" parent="MainCamera/Player/CapturePod"]
-position = Vector2(11, 5)
+position = Vector2(14, 0)
+
+[node name="PodShotLimitArea" type="Area2D" parent="MainCamera/Player" groups=["pod_limit"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainCamera/Player/PodShotLimitArea"]
+position = Vector2(51, 12)
+shape = SubResource("RectangleShape2D_h5il3")
 
 [node name="Camera Boundary" type="CanvasGroup" parent="MainCamera"]
 position = Vector2(132, -2)
@@ -288,7 +307,7 @@ position = Vector2(129, -113)
 shape = SubResource("SegmentShape2D_kt2lq")
 
 [node name="BulletEnemy" parent="." instance=ExtResource("5_3y8n8")]
-position = Vector2(238, -40)
+position = Vector2(224, -41)
 
 [node name="BulletEnemy2" parent="." instance=ExtResource("5_3y8n8")]
 position = Vector2(241, 33)
@@ -302,4 +321,7 @@ position = Vector2(386, 89)
 [node name="MissileEnemy" parent="." instance=ExtResource("15_x1d3y")]
 position = Vector2(396, -20)
 
-[connection signal="body_entered" from="MainCamera/Player/CapturePod" to="MainCamera/Player/CapturePod" method="_on_body_entered"]
+[connection signal="area_entered" from="MainCamera/Player/CapturePod" to="MainCamera/Player/CapturePod" method="_on_area_entered" flags=18]
+[connection signal="body_entered" from="MainCamera/Player/CapturePod" to="MainCamera/Player/CapturePod" method="_on_body_entered" flags=18]
+[connection signal="timeout" from="MainCamera/Player/CapturePod/CaptureTimer" to="MainCamera/Player/CapturePod" method="_on_capture_timer_timeout" flags=18]
+[connection signal="timeout" from="MainCamera/Player/CapturePod/BulletTimer" to="MainCamera/Player/CapturePod" method="_on_bullet_timer_timeout" flags=18]
