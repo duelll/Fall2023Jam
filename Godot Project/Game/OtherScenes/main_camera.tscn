@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cka5qepnme6bn" path="res://Game/Sprites/Space_Game_Ship-Sheet.png" id="4_f0f2f"]
 [ext_resource type="Texture2D" uid="uid://cfwe5hltxu7n8" path="res://Game/Sprites/Space_Game_Ship_Right_Turn.png" id="5_rmsyo"]
 [ext_resource type="Texture2D" uid="uid://dxj0gqfh08k6t" path="res://Game/Sprites/Space_Game_Ship_Left_Turn.png" id="6_8uw3m"]
-[ext_resource type="Script" path="res://Game/Levels/CapturePod.gd" id="7_4epr6"]
+[ext_resource type="Script" path="res://Game/Scripts/CapturePod.gd" id="7_e234t"]
 [ext_resource type="PackedScene" uid="uid://yl7fqdqw5pyx" path="res://Game/OtherScenes/player_missile.tscn" id="8_rjq07"]
 [ext_resource type="Texture2D" uid="uid://b0jlqam5mb5hv" path="res://Game/Sprites/CapturedShotFlip.png" id="9_loyhg"]
 [ext_resource type="Texture2D" uid="uid://chv5t26w37ftw" path="res://Game/Sprites/Capsule.png" id="10_1xeeb"]
@@ -207,7 +207,7 @@ shape = SubResource("RectangleShape2D_6gon3")
 
 [node name="CapturePod" type="Area2D" parent="Player"]
 position = Vector2(7, 11)
-script = ExtResource("7_4epr6")
+script = ExtResource("7_e234t")
 player_bullet = ExtResource("3_r7y0j")
 player_missile = ExtResource("8_rjq07")
 

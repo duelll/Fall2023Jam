@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://du8vn3waj17sp"]
+[gd_scene load_steps=47 format=3 uid="uid://du8vn3waj17sp"]
 
 [ext_resource type="Texture2D" uid="uid://5jhg57r0ucxj" path="res://Game/Sprites/Background.png" id="1_rpbm6"]
 [ext_resource type="Texture2D" uid="uid://x3nmwa00su81" path="res://Game/Sprites/StalaBottom.png" id="2_5ps5e"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cka5qepnme6bn" path="res://Game/Sprites/Space_Game_Ship-Sheet.png" id="7_ofiyc"]
 [ext_resource type="Texture2D" uid="uid://cfwe5hltxu7n8" path="res://Game/Sprites/Space_Game_Ship_Right_Turn.png" id="8_n1eni"]
 [ext_resource type="Texture2D" uid="uid://dxj0gqfh08k6t" path="res://Game/Sprites/Space_Game_Ship_Left_Turn.png" id="9_gxay5"]
-[ext_resource type="Script" path="res://Game/Levels/CapturePod.gd" id="10_xknon"]
+[ext_resource type="Script" path="res://Game/Scripts/CapturePod.gd" id="10_hp2ar"]
 [ext_resource type="PackedScene" uid="uid://yl7fqdqw5pyx" path="res://Game/OtherScenes/player_missile.tscn" id="11_7o2xy"]
 [ext_resource type="Texture2D" uid="uid://b0jlqam5mb5hv" path="res://Game/Sprites/CapturedShotFlip.png" id="11_nyg3y"]
 [ext_resource type="Texture2D" uid="uid://chv5t26w37ftw" path="res://Game/Sprites/Capsule.png" id="12_htnb0"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://dr4was1w3x7a1" path="res://Game/OtherScenes/spread_enemy_big.tscn" id="18_0dywr"]
 [ext_resource type="PackedScene" uid="uid://m8govf7lymjr" path="res://Game/OtherScenes/missile_enemy.tscn" id="19_gfsfg"]
 [ext_resource type="PackedScene" uid="uid://cvn7og7jcwte1" path="res://Game/OtherScenes/gear.tscn" id="21_2amam"]
+[ext_resource type="PackedScene" uid="uid://gkd8l7udo10q" path="res://Game/OtherScenes/drill_obstacle.tscn" id="23_nfumk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nhvma"]
 atlas = ExtResource("7_ofiyc")
@@ -256,7 +257,7 @@ shape = SubResource("RectangleShape2D_6gon3")
 
 [node name="CapturePod" type="Area2D" parent="MainCamera/Player"]
 position = Vector2(7, 11)
-script = ExtResource("10_xknon")
+script = ExtResource("10_hp2ar")
 player_bullet = ExtResource("6_vc33b")
 player_missile = ExtResource("11_7o2xy")
 
@@ -414,6 +415,9 @@ position = Vector2(511, 34)
 
 [node name="Gear" parent="." instance=ExtResource("21_2amam")]
 position = Vector2(367, -1)
+
+[node name="DrillObstacle" parent="." instance=ExtResource("23_nfumk")]
+position = Vector2(92, -154)
 
 [connection signal="area_entered" from="MainCamera/Player/CapturePod" to="MainCamera/Player/CapturePod" method="_on_area_entered" flags=18]
 [connection signal="body_entered" from="MainCamera/Player/CapturePod" to="MainCamera/Player/CapturePod" method="_on_body_entered" flags=18]
