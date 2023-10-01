@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://du8vn3waj17sp"]
+[gd_scene load_steps=48 format=3 uid="uid://du8vn3waj17sp"]
 
 [ext_resource type="Texture2D" uid="uid://5jhg57r0ucxj" path="res://Game/Sprites/Background.png" id="1_rpbm6"]
 [ext_resource type="Texture2D" uid="uid://x3nmwa00su81" path="res://Game/Sprites/StalaBottom.png" id="2_5ps5e"]
@@ -23,6 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://m8govf7lymjr" path="res://Game/OtherScenes/missile_enemy.tscn" id="19_gfsfg"]
 [ext_resource type="PackedScene" uid="uid://cvn7og7jcwte1" path="res://Game/OtherScenes/gear.tscn" id="21_2amam"]
 [ext_resource type="PackedScene" uid="uid://gkd8l7udo10q" path="res://Game/OtherScenes/drill_obstacle.tscn" id="23_nfumk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i1k0k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nhvma"]
 atlas = ExtResource("7_ofiyc")
@@ -185,6 +187,14 @@ a = Vector2(-4, -110)
 b = Vector2(-4, 112)
 
 [node name="NoelleTestScene" type="Node2D"]
+
+[node name="WinArea" type="Area2D" parent="." groups=["win"]]
+position = Vector2(1259, 21)
+scale = Vector2(-1, 13.9201)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinArea"]
+position = Vector2(-49.9999, -1.43677)
+shape = SubResource("RectangleShape2D_i1k0k")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_limit_end = Vector2(1e+14, 0)
@@ -417,7 +427,7 @@ position = Vector2(511, 34)
 position = Vector2(367, -1)
 
 [node name="DrillObstacle" parent="." instance=ExtResource("23_nfumk")]
-position = Vector2(92, -154)
+position = Vector2(162, -157)
 
 [connection signal="area_entered" from="MainCamera/Player/CapturePod" to="MainCamera/Player/CapturePod" method="_on_area_entered" flags=18]
 [connection signal="body_entered" from="MainCamera/Player/CapturePod" to="MainCamera/Player/CapturePod" method="_on_body_entered" flags=18]
