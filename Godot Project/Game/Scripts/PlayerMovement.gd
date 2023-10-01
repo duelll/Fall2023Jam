@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 @export var speed = 200
-@export var bullet_speed = 250
 @export var player_bullet : PackedScene
 @export var max_bullets = 3
 
@@ -34,6 +33,5 @@ func shoot():
 func actually_shoot():
 	var inst = player_bullet.instantiate()
 	owner.add_child(inst)
-	inst.speed = bullet_speed
 	#inst.transform = $FrontBarrel.global_transform
 	inst.set_position($FrontBarrel.get_global_position())
