@@ -223,13 +223,14 @@ texture = ExtResource("3_mlveg")
 
 [node name="MainCamera" type="Camera2D" parent="."]
 script = ExtResource("1_aif8p")
-scroll_speed = 0.2
+scroll_speed = 27.0
 
 [node name="Player" type="CharacterBody2D" parent="MainCamera" groups=["player"]]
 position = Vector2(12, -1)
 script = ExtResource("2_d36fn")
-speed = 150
+speed = 127
 player_bullet = ExtResource("3_wws5s")
+max_bullets = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MainCamera/Player"]
 texture_filter = 1
@@ -306,7 +307,7 @@ position = Vector2(129, -113)
 shape = SubResource("SegmentShape2D_kt2lq")
 
 [node name="BulletEnemy" parent="." instance=ExtResource("5_3y8n8")]
-position = Vector2(238, -40)
+position = Vector2(224, -41)
 
 [node name="BulletEnemy2" parent="." instance=ExtResource("5_3y8n8")]
 position = Vector2(241, 33)
@@ -320,7 +321,7 @@ position = Vector2(386, 89)
 [node name="MissileEnemy" parent="." instance=ExtResource("15_x1d3y")]
 position = Vector2(396, -20)
 
-[connection signal="area_entered" from="MainCamera/Player/CapturePod" to="MainCamera/Player/CapturePod" method="_on_area_entered"]
-[connection signal="body_entered" from="MainCamera/Player/CapturePod" to="MainCamera/Player/CapturePod" method="_on_body_entered"]
-[connection signal="timeout" from="MainCamera/Player/CapturePod/CaptureTimer" to="MainCamera/Player/CapturePod" method="_on_capture_timer_timeout"]
-[connection signal="timeout" from="MainCamera/Player/CapturePod/BulletTimer" to="MainCamera/Player/CapturePod" method="_on_bullet_timer_timeout"]
+[connection signal="area_entered" from="MainCamera/Player/CapturePod" to="MainCamera/Player/CapturePod" method="_on_area_entered" flags=18]
+[connection signal="body_entered" from="MainCamera/Player/CapturePod" to="MainCamera/Player/CapturePod" method="_on_body_entered" flags=18]
+[connection signal="timeout" from="MainCamera/Player/CapturePod/CaptureTimer" to="MainCamera/Player/CapturePod" method="_on_capture_timer_timeout" flags=18]
+[connection signal="timeout" from="MainCamera/Player/CapturePod/BulletTimer" to="MainCamera/Player/CapturePod" method="_on_bullet_timer_timeout" flags=18]

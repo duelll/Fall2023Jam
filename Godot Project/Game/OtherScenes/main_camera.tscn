@@ -1,12 +1,162 @@
-[gd_scene load_steps=10 format=3 uid="uid://d18tr4esofqrk"]
+[gd_scene load_steps=37 format=3 uid="uid://c3bj1yqb01dxk"]
 
-[ext_resource type="Script" path="res://Game/Scripts/MainCamera.gd" id="1_14l8s"]
-[ext_resource type="Script" path="res://Game/Scripts/PlayerMovement.gd" id="2_b5bdh"]
-[ext_resource type="PackedScene" uid="uid://b4355rvbnesde" path="res://Game/OtherScenes/player_bullet.tscn" id="3_0psmg"]
-[ext_resource type="Texture2D" uid="uid://dqbbx5iitsdg6" path="res://Game/Sprites/SpaceShipAsset.png" id="4_ifx62"]
+[ext_resource type="Script" path="res://Game/Scripts/MainCamera.gd" id="1_hwhi4"]
+[ext_resource type="Script" path="res://Game/Scripts/PlayerMovement.gd" id="2_ysdih"]
+[ext_resource type="PackedScene" uid="uid://b4355rvbnesde" path="res://Game/OtherScenes/player_bullet.tscn" id="3_r7y0j"]
+[ext_resource type="Texture2D" uid="uid://cka5qepnme6bn" path="res://Game/Sprites/Space_Game_Ship-Sheet.png" id="4_f0f2f"]
+[ext_resource type="Texture2D" uid="uid://cfwe5hltxu7n8" path="res://Game/Sprites/Space_Game_Ship_Right_Turn.png" id="5_rmsyo"]
+[ext_resource type="Texture2D" uid="uid://dxj0gqfh08k6t" path="res://Game/Sprites/Space_Game_Ship_Left_Turn.png" id="6_8uw3m"]
+[ext_resource type="Script" path="res://Game/Levels/CapturePod.gd" id="7_4epr6"]
+[ext_resource type="PackedScene" uid="uid://yl7fqdqw5pyx" path="res://Game/OtherScenes/player_missile.tscn" id="8_rjq07"]
+[ext_resource type="Texture2D" uid="uid://b0jlqam5mb5hv" path="res://Game/Sprites/CapturedShotFlip.png" id="9_loyhg"]
+[ext_resource type="Texture2D" uid="uid://chv5t26w37ftw" path="res://Game/Sprites/Capsule.png" id="10_1xeeb"]
+[ext_resource type="Texture2D" uid="uid://c70omh7nxlhn1" path="res://Game/Sprites/CaptureMissileFlip.png" id="11_260a0"]
+[ext_resource type="Texture2D" uid="uid://2cufaer4hxmo" path="res://Game/Sprites/CapturedSpreadFlip.png" id="12_jt0a3"]
+[ext_resource type="Script" path="res://Game/Scripts/SetAnimationDefault.gd" id="13_jths8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhvma"]
+atlas = ExtResource("4_f0f2f")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfbft"]
+atlas = ExtResource("4_f0f2f")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhlpc"]
+atlas = ExtResource("4_f0f2f")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4md4"]
+atlas = ExtResource("5_rmsyo")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txvf8"]
+atlas = ExtResource("5_rmsyo")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tck3v"]
+atlas = ExtResource("5_rmsyo")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3ttr"]
+atlas = ExtResource("6_8uw3m")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpjle"]
+atlas = ExtResource("6_8uw3m")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocu42"]
+atlas = ExtResource("6_8uw3m")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5j37b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhvma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfbft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhlpc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a4md4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txvf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tck3v")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3ttr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpjle")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocu42")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2sxjj"]
-size = Vector2(14, 3)
+size = Vector2(12, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6gon3"]
+size = Vector2(14, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_al4bs"]
+size = Vector2(16, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdihv"]
+atlas = ExtResource("9_loyhg")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f10m8"]
+atlas = ExtResource("10_1xeeb")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg7dx"]
+atlas = ExtResource("11_260a0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wvtf"]
+atlas = ExtResource("12_jt0a3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_37ogy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdihv")
+}],
+"loop": false,
+"name": &"bullet",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f10m8")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vg7dx")
+}],
+"loop": false,
+"name": &"missile",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wvtf")
+}],
+"loop": false,
+"name": &"spread",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5il3"]
+size = Vector2(9, 11.5)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qor5w"]
 a = Vector2(126, -1)
@@ -25,30 +175,67 @@ a = Vector2(-4, -110)
 b = Vector2(-4, 112)
 
 [node name="MainCamera" type="Camera2D"]
-script = ExtResource("1_14l8s")
-scroll_speed = 0.2
+script = ExtResource("1_hwhi4")
+scroll_speed = 127.0
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 position = Vector2(12, -1)
-script = ExtResource("2_b5bdh")
-player_bullet = ExtResource("3_0psmg")
+script = ExtResource("2_ysdih")
+speed = 127
+player_bullet = ExtResource("3_r7y0j")
+max_bullets = 2
 
-[node name="PlayerHurtbox" type="CollisionShape2D" parent="Player"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+texture_filter = 1
+position = Vector2(0, 1)
+sprite_frames = SubResource("SpriteFrames_5j37b")
+
+[node name="FrontBarrel" type="Marker2D" parent="Player"]
+position = Vector2(14, 2)
+
+[node name="PlayerHurtbox" type="CollisionShape2D" parent="Player" groups=["player"]]
 z_index = 1
-position = Vector2(14, -3.5)
+position = Vector2(-3, 4)
 shape = SubResource("RectangleShape2D_2sxjj")
 debug_color = Color(0.0941176, 0.643137, 0.203922, 0.419608)
 
-[node name="PlayerSprite" type="Sprite2D" parent="Player"]
-texture_filter = 3
-position = Vector2(15, -4)
-rotation = 1.5708
-texture = ExtResource("4_ifx62")
-region_enabled = true
-region_rect = Rect2(0, 0, 17, 17)
+[node name="HitDetection" type="Area2D" parent="Player" groups=["player"]]
 
-[node name="FrontBarrel" type="Marker2D" parent="Player"]
-position = Vector2(26, -4)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/HitDetection"]
+position = Vector2(-3, 4)
+shape = SubResource("RectangleShape2D_6gon3")
+
+[node name="CapturePod" type="Area2D" parent="Player"]
+position = Vector2(7, 11)
+script = ExtResource("7_4epr6")
+player_bullet = ExtResource("3_r7y0j")
+player_missile = ExtResource("8_rjq07")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/CapturePod"]
+position = Vector2(4, 1)
+shape = SubResource("RectangleShape2D_al4bs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player/CapturePod"]
+texture_filter = 1
+position = Vector2(4, 0)
+sprite_frames = SubResource("SpriteFrames_37ogy")
+animation = &"spread"
+script = ExtResource("13_jths8")
+
+[node name="CaptureTimer" type="Timer" parent="Player/CapturePod"]
+wait_time = 10.0
+
+[node name="BulletTimer" type="Timer" parent="Player/CapturePod"]
+wait_time = 0.5
+
+[node name="Marker2D" type="Marker2D" parent="Player/CapturePod"]
+position = Vector2(14, 0)
+
+[node name="PodShotLimitArea" type="Area2D" parent="Player" groups=["pod_limit"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PodShotLimitArea"]
+position = Vector2(51, 12)
+shape = SubResource("RectangleShape2D_h5il3")
 
 [node name="Camera Boundary" type="CanvasGroup" parent="."]
 position = Vector2(132, -2)
@@ -71,3 +258,8 @@ shape = SubResource("SegmentShape2D_jb1uu")
 [node name="EastWall" type="CollisionShape2D" parent="Camera Boundary/StaticBody2D"]
 position = Vector2(129, -113)
 shape = SubResource("SegmentShape2D_kt2lq")
+
+[connection signal="area_entered" from="Player/CapturePod" to="Player/CapturePod" method="_on_area_entered"]
+[connection signal="body_entered" from="Player/CapturePod" to="Player/CapturePod" method="_on_body_entered"]
+[connection signal="timeout" from="Player/CapturePod/CaptureTimer" to="Player/CapturePod" method="_on_capture_timer_timeout"]
+[connection signal="timeout" from="Player/CapturePod/BulletTimer" to="Player/CapturePod" method="_on_bullet_timer_timeout"]

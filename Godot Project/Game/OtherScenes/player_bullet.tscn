@@ -10,6 +10,7 @@ height = 8.0
 [node name="PlayerBullet" type="Area2D" groups=["player_bullets"]]
 position = Vector2(2, -2)
 script = ExtResource("1_1su6p")
+speed = 200
 
 [node name="BulletHitbox" type="CollisionShape2D" parent="."]
 position = Vector2(2, -1)
