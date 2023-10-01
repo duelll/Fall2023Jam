@@ -21,6 +21,7 @@ func shoot():
 		actually_shoot()
 
 func actually_shoot():
-	var b = player_bullet.instantiate()
-	owner.add_child(b)
-	b.transform = $FrontBarrel.global_transform
+	var inst = player_bullet.instantiate()
+	owner.add_child(inst)
+	#inst.transform = $FrontBarrel.global_transform
+	inst.set_position($FrontBarrel.get_global_position())

@@ -1,12 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8mgrbpeuc2ry"]
+[gd_scene load_steps=14 format=3 uid="uid://b8mgrbpeuc2ry"]
 
 [ext_resource type="Script" path="res://Game/Scripts/MainCamera.gd" id="1_aif8p"]
 [ext_resource type="Script" path="res://Game/Scripts/PlayerMovement.gd" id="2_d36fn"]
+[ext_resource type="Texture2D" uid="uid://x3nmwa00su81" path="res://Game/Sprites/StalaBottom.png" id="3_l2mlq"]
+[ext_resource type="Texture2D" uid="uid://m0jqrrv1exij" path="res://Game/Sprites/StalaTop.png" id="3_mlveg"]
 [ext_resource type="PackedScene" uid="uid://b4355rvbnesde" path="res://Game/OtherScenes/player_bullet.tscn" id="3_wws5s"]
-[ext_resource type="Texture2D" uid="uid://dqbbx5iitsdg6" path="res://Game/Sprites/SpaceShipAsset.png" id="4_o8koo"]
+[ext_resource type="Texture2D" uid="uid://cka5qepnme6bn" path="res://Game/Sprites/Space_Game_Ship-Sheet.png" id="4_0bhhw"]
+[ext_resource type="PackedScene" uid="uid://sgy7tqnup0hn" path="res://bullet_enemy.tscn" id="5_3y8n8"]
+[ext_resource type="Texture2D" uid="uid://5jhg57r0ucxj" path="res://Game/Sprites/Background.png" id="6_d3s0n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2sxjj"]
-size = Vector2(14, 3)
+size = Vector2(14, 6)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qor5w"]
 a = Vector2(126, -1)
@@ -26,15 +30,38 @@ b = Vector2(-4, 112)
 
 [node name="NoelleTestScene" type="Node2D"]
 
-[node name="TestText" type="TextEdit" parent="."]
-offset_left = 155.0
-offset_top = 130.0
-offset_right = 250.0
-offset_bottom = 218.0
-text = "Testing"
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_limit_end = Vector2(1e+14, 0)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.25, 1)
+motion_mirroring = Vector2(256, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+z_index = -2
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(128, 0)
+texture = ExtResource("6_d3s0n")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(256, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+z_index = -2
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(129, 105)
+texture = ExtResource("3_l2mlq")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+z_index = -2
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(129, -111)
+texture = ExtResource("3_mlveg")
 
 [node name="MainCamera" type="Camera2D" parent="."]
-position = Vector2(128, 112)
 script = ExtResource("1_aif8p")
 scroll_speed = 0.2
 
@@ -45,20 +72,20 @@ player_bullet = ExtResource("3_wws5s")
 
 [node name="PlayerHurtbox" type="CollisionShape2D" parent="MainCamera/Player"]
 z_index = 1
-position = Vector2(14, -3.5)
+position = Vector2(-2, 2)
 shape = SubResource("RectangleShape2D_2sxjj")
 debug_color = Color(0.0941176, 0.643137, 0.203922, 0.419608)
 
 [node name="PlayerSprite" type="Sprite2D" parent="MainCamera/Player"]
 texture_filter = 3
-position = Vector2(15.0441, -3.4787)
-rotation = 1.5708
-texture = ExtResource("4_o8koo")
-region_enabled = true
+position = Vector2(-1, 2)
+texture = ExtResource("4_0bhhw")
+hframes = 3
+frame = 2
 region_rect = Rect2(0, 0, 17, 17)
 
 [node name="FrontBarrel" type="Marker2D" parent="MainCamera/Player"]
-position = Vector2(28, -3)
+position = Vector2(14, 2)
 
 [node name="Camera Boundary" type="CanvasGroup" parent="MainCamera"]
 position = Vector2(132, -2)
@@ -81,3 +108,9 @@ shape = SubResource("SegmentShape2D_jb1uu")
 [node name="EastWall" type="CollisionShape2D" parent="MainCamera/Camera Boundary/StaticBody2D"]
 position = Vector2(129, -113)
 shape = SubResource("SegmentShape2D_kt2lq")
+
+[node name="BulletEnemy" parent="." instance=ExtResource("5_3y8n8")]
+position = Vector2(254, -45)
+
+[node name="BulletEnemy2" parent="." instance=ExtResource("5_3y8n8")]
+position = Vector2(255.425, 53.752)

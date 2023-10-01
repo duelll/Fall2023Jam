@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://sgy7tqnup0hn"]
+
+[ext_resource type="Script" path="res://Game/Levels/BulletEnemy.gd" id="1_srve5"]
+[ext_resource type="PackedScene" uid="uid://bfj75i0gn5ick" path="res://Game/OtherScenes/enemy_bullet.tscn" id="2_yjaij"]
+[ext_resource type="Texture2D" uid="uid://dn4b3m13uxaqq" path="res://Game/Sprites/SmallBulletEnemy.png" id="3_oktuo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sylvt"]
+size = Vector2(14, 14)
+
+[node name="BulletEnemy" type="AnimatableBody2D"]
+position = Vector2(99, -41)
+script = ExtResource("1_srve5")
+enemy_bullet = ExtResource("2_yjaij")
+
+[node name="BulletEnemySprite" type="Sprite2D" parent="."]
+texture_filter = 1
+rotation = 3.14159
+texture = ExtResource("3_oktuo")
+
+[node name="ShootLocation" type="Marker2D" parent="."]
+position = Vector2(13, 0)
+rotation = 3.14159
+
+[node name="EnemyHurtbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_sylvt")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

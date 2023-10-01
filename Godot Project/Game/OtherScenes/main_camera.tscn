@@ -25,7 +25,6 @@ a = Vector2(-4, -110)
 b = Vector2(-4, 112)
 
 [node name="MainCamera" type="Camera2D"]
-position = Vector2(128, 112)
 script = ExtResource("1_14l8s")
 scroll_speed = 0.2
 
@@ -42,14 +41,14 @@ debug_color = Color(0.0941176, 0.643137, 0.203922, 0.419608)
 
 [node name="PlayerSprite" type="Sprite2D" parent="Player"]
 texture_filter = 3
-position = Vector2(15.0441, -3.4787)
+position = Vector2(15, -4)
 rotation = 1.5708
 texture = ExtResource("4_ifx62")
 region_enabled = true
 region_rect = Rect2(0, 0, 17, 17)
 
 [node name="FrontBarrel" type="Marker2D" parent="Player"]
-position = Vector2(28, -3)
+position = Vector2(26, -4)
 
 [node name="Camera Boundary" type="CanvasGroup" parent="."]
 position = Vector2(132, -2)
