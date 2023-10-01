@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://du8vn3waj17sp"]
+[gd_scene load_steps=56 format=3 uid="uid://du8vn3waj17sp"]
 
 [ext_resource type="Texture2D" uid="uid://5jhg57r0ucxj" path="res://Game/Sprites/Background.png" id="1_rpbm6"]
 [ext_resource type="Texture2D" uid="uid://x3nmwa00su81" path="res://Game/Sprites/StalaBottom.png" id="2_5ps5e"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://m8govf7lymjr" path="res://Game/OtherScenes/missile_enemy.tscn" id="19_gfsfg"]
 [ext_resource type="PackedScene" uid="uid://cvn7og7jcwte1" path="res://Game/OtherScenes/gear.tscn" id="21_2amam"]
 [ext_resource type="PackedScene" uid="uid://gkd8l7udo10q" path="res://Game/OtherScenes/drill_obstacle.tscn" id="23_nfumk"]
+[ext_resource type="PackedScene" uid="uid://clurhgdf3wvra" path="res://Game/OtherScenes/MetalObstacle1.tscn" id="25_b3jvq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i1k0k"]
 
@@ -241,7 +242,7 @@ position = Vector2(1259, 21)
 scale = Vector2(-1, 13.9201)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WinArea"]
-position = Vector2(-49.9999, -1.43677)
+position = Vector2(25, -1.65229)
 shape = SubResource("RectangleShape2D_i1k0k")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -429,7 +430,7 @@ position = Vector2(535, -107)
 position = Vector2(726, -109)
 
 [node name="SpreadEnemy" parent="." instance=ExtResource("17_rqrxh")]
-position = Vector2(286, -7)
+position = Vector2(323, -12)
 
 [node name="SpreadEnemy3" parent="." instance=ExtResource("17_rqrxh")]
 position = Vector2(583, 13)
@@ -459,7 +460,7 @@ position = Vector2(659, 87)
 position = Vector2(914, 89)
 
 [node name="MissileEnemy" parent="." instance=ExtResource("19_gfsfg")]
-position = Vector2(394, -66)
+position = Vector2(431, -41)
 
 [node name="MissileEnemy2" parent="." instance=ExtResource("19_gfsfg")]
 position = Vector2(831, -27)
@@ -477,7 +478,14 @@ position = Vector2(511, 34)
 position = Vector2(367, -1)
 
 [node name="DrillObstacle" parent="." instance=ExtResource("23_nfumk")]
-position = Vector2(162, -157)
+position = Vector2(137, -163)
+
+[node name="Gear2" parent="." instance=ExtResource("25_b3jvq")]
+position = Vector2(126, -2)
+
+[node name="Gear3" parent="." instance=ExtResource("25_b3jvq")]
+position = Vector2(996, 0)
+rotation = 3.14159
 
 [connection signal="area_entered" from="MainCamera/Player/CapturePod" to="MainCamera/Player/CapturePod" method="_on_area_entered" flags=18]
 [connection signal="body_entered" from="MainCamera/Player/CapturePod" to="MainCamera/Player/CapturePod" method="_on_body_entered" flags=18]
