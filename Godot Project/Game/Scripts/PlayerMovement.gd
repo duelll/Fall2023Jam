@@ -34,7 +34,7 @@ func shoot():
 
 func actually_shoot():
 	var inst = player_bullet.instantiate()
-	owner.add_child(inst)
+	get_tree().current_scene.add_child(inst)
 	#inst.transform = $FrontBarrel.global_transform
 	inst.set_position($FrontBarrel.get_global_position())
 	

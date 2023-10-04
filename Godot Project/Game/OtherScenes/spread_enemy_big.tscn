@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cptepfe4npmv0" path="res://Game/Sprites/ExplosionSpriteSheet.png" id="3_writ5"]
 [ext_resource type="Script" path="res://Game/Scripts/SetAnimationDefault.gd" id="5_fnrg6"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3qsom"]
+size = Vector2(22, 51.5)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_misip"]
 atlas = ExtResource("3_writ5")
 region = Rect2(198, 0, 99, 101)
@@ -43,13 +46,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sylvt"]
 size = Vector2(35, 53.7488)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3qsom"]
-size = Vector2(22, 51.5)
-
 [node name="SpreadEnemyBig" type="AnimatableBody2D" groups=["enemy_kill"]]
 position = Vector2(100, -41)
 script = ExtResource("1_l7kvh")
 enemy_bullet = ExtResource("2_qyd3i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemy_hitbox"]]
+position = Vector2(-3, 2.25)
+shape = SubResource("RectangleShape2D_3qsom")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -63,17 +67,13 @@ rotation = -2.36143
 
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="EnemyHitbox" type="CollisionShape2D" parent="Area2D" groups=["enemy_hitbox"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["enemy_hitbox"]]
 position = Vector2(-5.5, 1.87439)
 shape = SubResource("RectangleShape2D_sylvt")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
-
-[node name="EnemyHurtbox" type="CollisionShape2D" parent="." groups=["enemy_hitbox"]]
-position = Vector2(-3, 2.25)
-shape = SubResource("RectangleShape2D_3qsom")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

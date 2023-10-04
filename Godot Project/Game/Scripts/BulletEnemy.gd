@@ -4,6 +4,8 @@ extends AnimatableBody2D
 @export var health = 1
 @onready var Player = get_parent().get_node("MainCamera").get_node("Player")
 
+var death_processed = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -14,6 +16,11 @@ func _process(delta):
 	rotation = snapped(a, PI/4)
 	
 	if (health < 1):
+		if death_processed == false:
+			$Area2D.queue_free()
+			$CollisionShape2D.queue_free()
+			$ShootLocation.queue_free()
+			death_processed = true
 		$AnimatedSprite2D.play("death")
 		await $AnimatedSprite2D.animation_finished
 		queue_free()
@@ -26,12 +33,15 @@ func shoot():
 	
 func actually_shoot():
 	var inst = enemy_bullet.instantiate()
-	owner.add_child(inst)
+	get_tree().current_scene.add_child(inst)
 	inst.speed = 50
 	inst.color = "pink"
 	#inst.transform = $FrontBarrel.global_transform
-	inst.set_position($ShootLocation.get_global_position())
-	inst.rotation = rotation
+	if get_node_or_null("ShootLocation") != null:
+		inst.set_position($ShootLocation.get_global_position())
+		inst.rotation = rotation
+	else:
+		inst.queue_free()
 
 func _on_area_2d_body_entered(body):
 	if(body.is_in_group("player")):

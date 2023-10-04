@@ -28,26 +28,26 @@ func get_input():
 	if Input.is_action_just_pressed("shoot"):
 		if (state == "bullet" and can_shoot == true):
 			var inst = player_bullet.instantiate()
-			owner.add_child(inst)
+			get_tree().current_scene.add_child(inst)
 			#inst.transform = $FrontBarrel.global_transform
-			inst.set_position($Marker2D.get_global_position())
+			inst.set_position($BulletSpawner.get_global_position())
 			can_shoot = false
 			$BulletTimer.wait_time = 0.3
 			$BulletTimer.start()
 		if (state == "missile" and can_shoot == true):
 			var inst = player_missile.instantiate()
-			owner.add_child(inst)
+			get_tree().current_scene.add_child(inst)
 			#inst.transform = $FrontBarrel.global_transform
-			inst.set_position($Marker2D.get_global_position())
+			inst.set_position($BulletSpawner.get_global_position())
 			can_shoot = false
 			$BulletTimer.wait_time = 1.1
 			$BulletTimer.start()
 		if (state == "spread" and can_shoot == true):
 			for angle in [-0.5,0,0.5]:	
 				var inst = player_bullet.instantiate()
-				owner.add_child(inst)
+				get_tree().current_scene.add_child(inst)
 				#inst.transform = $FrontBarrel.global_transform
-				inst.set_position($Marker2D.get_global_position())
+				inst.set_position($BulletSpawner.get_global_position())
 				inst.rotation = rotation + angle
 			can_shoot = false
 			$BulletTimer.wait_time = 0.7

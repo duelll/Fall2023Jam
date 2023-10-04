@@ -1,0 +1,95 @@
+[gd_scene load_steps=15 format=3 uid="uid://dy1wq0v6xv67u"]
+
+[ext_resource type="Script" path="res://Game/Scripts/CapturePod.gd" id="1_7oxib"]
+[ext_resource type="PackedScene" uid="uid://b4355rvbnesde" path="res://Game/OtherScenes/player_bullet.tscn" id="2_msh4n"]
+[ext_resource type="PackedScene" uid="uid://yl7fqdqw5pyx" path="res://Game/OtherScenes/player_missile.tscn" id="3_yga1p"]
+[ext_resource type="Texture2D" uid="uid://b0jlqam5mb5hv" path="res://Game/Sprites/CapturedShotFlip.png" id="4_r0g0v"]
+[ext_resource type="Texture2D" uid="uid://chv5t26w37ftw" path="res://Game/Sprites/Capsule.png" id="5_q7ukr"]
+[ext_resource type="Texture2D" uid="uid://c70omh7nxlhn1" path="res://Game/Sprites/CaptureMissileFlip.png" id="6_7uccr"]
+[ext_resource type="Texture2D" uid="uid://2cufaer4hxmo" path="res://Game/Sprites/CapturedSpreadFlip.png" id="7_7h3xv"]
+[ext_resource type="Script" path="res://Game/Scripts/SetAnimationDefault.gd" id="8_fwl38"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_al4bs"]
+size = Vector2(16, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdihv"]
+atlas = ExtResource("4_r0g0v")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f10m8"]
+atlas = ExtResource("5_q7ukr")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg7dx"]
+atlas = ExtResource("6_7uccr")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wvtf"]
+atlas = ExtResource("7_7h3xv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_37ogy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdihv")
+}],
+"loop": false,
+"name": &"bullet",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f10m8")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vg7dx")
+}],
+"loop": false,
+"name": &"missile",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wvtf")
+}],
+"loop": false,
+"name": &"spread",
+"speed": 5.0
+}]
+
+[node name="CapturePod" type="Area2D"]
+position = Vector2(7, 11)
+script = ExtResource("1_7oxib")
+player_bullet = ExtResource("2_msh4n")
+player_missile = ExtResource("3_yga1p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 1)
+shape = SubResource("RectangleShape2D_al4bs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(4, 0)
+sprite_frames = SubResource("SpriteFrames_37ogy")
+animation = &"spread"
+script = ExtResource("8_fwl38")
+
+[node name="CaptureTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="BulletTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="BulletSpawner" type="Marker2D" parent="."]
+position = Vector2(14, 0)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered" flags=18]
+[connection signal="body_entered" from="." to="." method="_on_body_entered" flags=18]
+[connection signal="timeout" from="CaptureTimer" to="." method="_on_capture_timer_timeout" flags=18]
+[connection signal="timeout" from="BulletTimer" to="." method="_on_bullet_timer_timeout" flags=18]
