@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://i1n5kgbsur5f"]
+[gd_scene load_steps=40 format=3 uid="uid://i1n5kgbsur5f"]
 
 [ext_resource type="Script" path="res://Game/Scripts/PlayerMovement.gd" id="1_jo23b"]
 [ext_resource type="PackedScene" uid="uid://b4355rvbnesde" path="res://Game/OtherScenes/player_bullet.tscn" id="2_pde5s"]
@@ -7,7 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://cfwe5hltxu7n8" path="res://Game/Sprites/Space_Game_Ship_Right_Turn.png" id="5_a88tr"]
 [ext_resource type="Texture2D" uid="uid://dxj0gqfh08k6t" path="res://Game/Sprites/Space_Game_Ship_Left_Turn.png" id="6_3mpc6"]
 [ext_resource type="Script" path="res://Game/Scripts/SetAnimationDefault.gd" id="7_fqm7c"]
-[ext_resource type="PackedScene" uid="uid://dy1wq0v6xv67u" path="res://Game/OtherScenes/capture_pod.tscn" id="8_qp6ao"]
+[ext_resource type="Script" path="res://Game/Scripts/CapturePod.gd" id="8_4o0d0"]
+[ext_resource type="PackedScene" uid="uid://dlo75xjwr8xyf" path="res://Game/OtherScenes/pod_bullet.tscn" id="9_du3fh"]
+[ext_resource type="PackedScene" uid="uid://yl7fqdqw5pyx" path="res://Game/OtherScenes/player_missile.tscn" id="9_me7qw"]
+[ext_resource type="Texture2D" uid="uid://b0jlqam5mb5hv" path="res://Game/Sprites/CapturedShotFlip.png" id="10_ejc35"]
+[ext_resource type="Texture2D" uid="uid://chv5t26w37ftw" path="res://Game/Sprites/Capsule.png" id="11_iq3td"]
+[ext_resource type="Texture2D" uid="uid://c70omh7nxlhn1" path="res://Game/Sprites/CaptureMissileFlip.png" id="12_30pxm"]
+[ext_resource type="Texture2D" uid="uid://2cufaer4hxmo" path="res://Game/Sprites/CapturedSpreadFlip.png" id="13_jx1qp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j6kxe"]
 atlas = ExtResource("3_5gqmd")
@@ -143,6 +149,60 @@ size = Vector2(12, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6gon3"]
 size = Vector2(14, 12)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_al4bs"]
+size = Vector2(16, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdihv"]
+atlas = ExtResource("10_ejc35")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f10m8"]
+atlas = ExtResource("11_iq3td")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg7dx"]
+atlas = ExtResource("12_30pxm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wvtf"]
+atlas = ExtResource("13_jx1qp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_37ogy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdihv")
+}],
+"loop": false,
+"name": &"bullet",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f10m8")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vg7dx")
+}],
+"loop": false,
+"name": &"missile",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wvtf")
+}],
+"loop": false,
+"name": &"spread",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h5il3"]
 size = Vector2(9, 11.5)
 
@@ -175,10 +235,39 @@ debug_color = Color(0.0941176, 0.643137, 0.203922, 0.419608)
 position = Vector2(-3, 4)
 shape = SubResource("RectangleShape2D_6gon3")
 
-[node name="CapturePod" parent="." instance=ExtResource("8_qp6ao")]
+[node name="CapturePod" type="Area2D" parent="."]
+position = Vector2(7, 11)
+script = ExtResource("8_4o0d0")
+pod_bullet = ExtResource("9_du3fh")
+player_missile = ExtResource("9_me7qw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CapturePod"]
+position = Vector2(4, 1)
+shape = SubResource("RectangleShape2D_al4bs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CapturePod"]
+texture_filter = 1
+position = Vector2(4, 0)
+sprite_frames = SubResource("SpriteFrames_37ogy")
+animation = &"spread"
+script = ExtResource("7_fqm7c")
+
+[node name="CaptureTimer" type="Timer" parent="CapturePod"]
+wait_time = 10.0
+
+[node name="BulletTimer" type="Timer" parent="CapturePod"]
+wait_time = 0.5
+
+[node name="BulletSpawner" type="Marker2D" parent="CapturePod"]
+position = Vector2(14, 0)
 
 [node name="PodShotLimitArea" type="Area2D" parent="." groups=["pod_limit"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PodShotLimitArea"]
 position = Vector2(51, 12)
 shape = SubResource("RectangleShape2D_h5il3")
+
+[connection signal="area_entered" from="CapturePod" to="CapturePod" method="_on_area_entered" flags=18]
+[connection signal="body_entered" from="CapturePod" to="CapturePod" method="_on_body_entered" flags=18]
+[connection signal="timeout" from="CapturePod/CaptureTimer" to="CapturePod" method="_on_capture_timer_timeout" flags=18]
+[connection signal="timeout" from="CapturePod/BulletTimer" to="CapturePod" method="_on_bullet_timer_timeout" flags=18]

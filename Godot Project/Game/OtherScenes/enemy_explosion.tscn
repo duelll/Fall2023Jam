@@ -33,8 +33,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0xgv3"]
-radius = 27.0
-height = 72.0
+radius = 25.0
+height = 50.0
 
 [node name="enemy_explosion" type="Area2D" groups=["enemy_bullets", "player_kill"]]
 script = ExtResource("1_fi6yu")
@@ -47,11 +47,11 @@ scale = Vector2(0.8, 0.6)
 texture_filter = 1
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_spjsm")
-frame = 1
-frame_progress = 0.180622
+frame = 2
+frame_progress = 1.0
 
 [node name="BulletHitbox" type="CollisionShape2D" parent="." groups=["player_kill"]]
-position = Vector2(-6, -1)
+position = Vector2(-8, -2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_0xgv3")
 

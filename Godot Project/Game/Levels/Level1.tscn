@@ -1,8 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://du8vn3waj17sp"]
+[gd_scene load_steps=24 format=3 uid="uid://du8vn3waj17sp"]
 
 [ext_resource type="Texture2D" uid="uid://5jhg57r0ucxj" path="res://Game/Sprites/Background.png" id="1_rpbm6"]
 [ext_resource type="Texture2D" uid="uid://x3nmwa00su81" path="res://Game/Sprites/StalaBottom.png" id="2_5ps5e"]
+[ext_resource type="Texture2D" uid="uid://d3y7rybgn1h5x" path="res://Game/Sprites/Grass.png" id="2_l6hd7"]
+[ext_resource type="Texture2D" uid="uid://cede0wuj4cj3a" path="res://Game/Sprites/Waterfall.png" id="3_8wbwa"]
 [ext_resource type="Texture2D" uid="uid://m0jqrrv1exij" path="res://Game/Sprites/StalaTop.png" id="3_h43os"]
+[ext_resource type="Script" path="res://Game/Scripts/SetAnimationDefault.gd" id="4_7l5cj"]
 [ext_resource type="Script" path="res://Game/Scripts/MainCamera.gd" id="4_ap1ai"]
 [ext_resource type="PackedScene" uid="uid://i1n5kgbsur5f" path="res://Game/OtherScenes/player.tscn" id="5_je4o6"]
 [ext_resource type="PackedScene" uid="uid://sgy7tqnup0hn" path="res://Game/OtherScenes/bullet_enemy.tscn" id="16_7kftf"]
@@ -12,9 +15,30 @@
 [ext_resource type="PackedScene" uid="uid://m8govf7lymjr" path="res://Game/OtherScenes/missile_enemy.tscn" id="19_gfsfg"]
 [ext_resource type="PackedScene" uid="uid://cvn7og7jcwte1" path="res://Game/OtherScenes/gear.tscn" id="21_2amam"]
 [ext_resource type="PackedScene" uid="uid://gkd8l7udo10q" path="res://Game/OtherScenes/drill_obstacle.tscn" id="23_nfumk"]
-[ext_resource type="PackedScene" uid="uid://clurhgdf3wvra" path="res://Game/OtherScenes/MetalObstacle1.tscn" id="25_b3jvq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i1k0k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3m1wy"]
+atlas = ExtResource("3_8wbwa")
+region = Rect2(0, 0, 82, 235)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_413ni"]
+atlas = ExtResource("3_8wbwa")
+region = Rect2(82, 0, 82, 235)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0f2dg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3m1wy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_413ni")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qor5w"]
 a = Vector2(126, -1)
@@ -32,10 +56,10 @@ b = Vector2(3, 97)
 a = Vector2(-4, -110)
 b = Vector2(-4, 112)
 
-[node name="NoelleTestScene" type="Node2D"]
+[node name="Level1" type="Node2D"]
 
 [node name="WinArea" type="Area2D" parent="." groups=["win"]]
-position = Vector2(1259, 21)
+position = Vector2(1332, 26)
 scale = Vector2(-1, 13.9201)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WinArea"]
@@ -43,10 +67,11 @@ position = Vector2(25, -1.65229)
 shape = SubResource("RectangleShape2D_i1k0k")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_limit_end = Vector2(1e+14, 0)
+scroll_limit_end = Vector2(10000, 0)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 z_index = -2
+position = Vector2(-128, 0)
 motion_scale = Vector2(0.25, 1)
 motion_mirroring = Vector2(256, 0)
 
@@ -57,12 +82,30 @@ texture_repeat = 2
 position = Vector2(128, 0)
 texture = ExtResource("1_rpbm6")
 
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+z_index = -2
+position = Vector2(-127, 1)
+motion_scale = Vector2(0.25, 1)
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+z_index = -1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(298, -85)
+texture = ExtResource("2_l6hd7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(519, 4)
+sprite_frames = SubResource("SpriteFrames_0f2dg")
+script = ExtResource("4_7l5cj")
+
 [node name="ParallaxForeground" type="ParallaxBackground" parent="."]
 layer = 100
-scroll_limit_end = Vector2(1e+14, 0)
+scroll_limit_end = Vector2(10000, 0)
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxForeground"]
 z_index = 1
+position = Vector2(-130, 0)
 motion_scale = Vector2(1.1, 1)
 motion_mirroring = Vector2(256, 0)
 
@@ -70,7 +113,7 @@ motion_mirroring = Vector2(256, 0)
 z_index = 1
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(129, 105)
+position = Vector2(129, 106)
 texture = ExtResource("2_5ps5e")
 
 [node name="Sprite2D2" type="Sprite2D" parent="ParallaxForeground/ParallaxLayer2"]
@@ -81,10 +124,13 @@ position = Vector2(129, -111)
 texture = ExtResource("3_h43os")
 
 [node name="MainCamera" type="Camera2D" parent="."]
+process_callback = 0
 script = ExtResource("4_ap1ai")
-scroll_speed = 27.0
+scroll_speed = 30.0
 
 [node name="Player" parent="MainCamera" instance=ExtResource("5_je4o6")]
+texture_filter = 1
+speed = 120
 
 [node name="Camera Boundary" type="CanvasGroup" parent="MainCamera"]
 position = Vector2(132, -2)
@@ -108,119 +154,108 @@ shape = SubResource("SegmentShape2D_jb1uu")
 position = Vector2(129, -113)
 shape = SubResource("SegmentShape2D_kt2lq")
 
-[node name="BigStalObstacle1" parent="." instance=ExtResource("16_nsenj")]
-position = Vector2(530, -170)
+[node name="Terrain" type="Node2D" parent="."]
 
-[node name="BigStalObstacle3" parent="." instance=ExtResource("16_nsenj")]
-position = Vector2(883, -187)
+[node name="BigStalObstacle1" parent="Terrain" instance=ExtResource("16_nsenj")]
+position = Vector2(569, -81)
 
-[node name="BigStalObstacle2" parent="." instance=ExtResource("16_nsenj")]
-position = Vector2(715, 186)
+[node name="BigStalObstacle3" parent="Terrain" instance=ExtResource("16_nsenj")]
+position = Vector2(877, -99)
+
+[node name="BigStalObstacle2" parent="Terrain" instance=ExtResource("16_nsenj")]
+position = Vector2(914, 109)
 rotation = -3.14159
 
-[node name="BulletEnemy" parent="." instance=ExtResource("16_7kftf")]
-position = Vector2(459, -25)
+[node name="Gear" parent="Terrain" instance=ExtResource("21_2amam")]
+position = Vector2(440, 4)
 
-[node name="BulletEnemy2" parent="." instance=ExtResource("16_7kftf")]
-position = Vector2(209, 37)
+[node name="DrillObstacle" parent="Terrain" instance=ExtResource("23_nfumk")]
+position = Vector2(342, -50)
 
-[node name="BulletEnemy3" parent="." instance=ExtResource("16_7kftf")]
-position = Vector2(614, 56)
+[node name="Enemies" type="Node2D" parent="."]
 
-[node name="BulletEnemy4" parent="." instance=ExtResource("16_7kftf")]
-position = Vector2(838, -108)
+[node name="BulletEnemy" parent="Enemies" instance=ExtResource("16_7kftf")]
+position = Vector2(532, -20)
 
-[node name="BulletEnemy10" parent="." instance=ExtResource("16_7kftf")]
-position = Vector2(965, -115)
+[node name="BulletEnemy2" parent="Enemies" instance=ExtResource("16_7kftf")]
+position = Vector2(324, 49)
 
-[node name="BulletEnemy11" parent="." instance=ExtResource("16_7kftf")]
-position = Vector2(927, -113)
+[node name="BulletEnemy3" parent="Enemies" instance=ExtResource("16_7kftf")]
+position = Vector2(687, 61)
 
-[node name="BulletEnemy12" parent="." instance=ExtResource("16_7kftf")]
-position = Vector2(927, -113)
+[node name="BulletEnemy4" parent="Enemies" instance=ExtResource("16_7kftf")]
+position = Vector2(911, -103)
+
+[node name="BulletEnemy10" parent="Enemies" instance=ExtResource("16_7kftf")]
+position = Vector2(1038, -110)
+
+[node name="BulletEnemy11" parent="Enemies" instance=ExtResource("16_7kftf")]
+position = Vector2(1000, -108)
+
+[node name="BulletEnemy13" parent="Enemies" instance=ExtResource("16_7kftf")]
+position = Vector2(970, -110)
 rotation = -1.53295
 
-[node name="BulletEnemy13" parent="." instance=ExtResource("16_7kftf")]
-position = Vector2(897, -115)
+[node name="BulletEnemy15" parent="Enemies" instance=ExtResource("16_7kftf")]
+position = Vector2(1036, -38)
 rotation = -1.53295
 
-[node name="BulletEnemy14" parent="." instance=ExtResource("16_7kftf")]
-position = Vector2(974, 11)
-rotation = -1.53295
+[node name="BulletEnemy5" parent="Enemies" instance=ExtResource("16_7kftf")]
+position = Vector2(601, 116)
 
-[node name="BulletEnemy15" parent="." instance=ExtResource("16_7kftf")]
-position = Vector2(963, -43)
-rotation = -1.53295
+[node name="BulletEnemy6" parent="Enemies" instance=ExtResource("16_7kftf")]
+position = Vector2(616, -48)
 
-[node name="BulletEnemy5" parent="." instance=ExtResource("16_7kftf")]
-position = Vector2(528, 111)
+[node name="BulletEnemy7" parent="Enemies" instance=ExtResource("16_7kftf")]
+position = Vector2(534, 114)
 
-[node name="BulletEnemy6" parent="." instance=ExtResource("16_7kftf")]
-position = Vector2(543, -53)
+[node name="BulletEnemy8" parent="Enemies" instance=ExtResource("16_7kftf")]
+position = Vector2(608, -102)
 
-[node name="BulletEnemy7" parent="." instance=ExtResource("16_7kftf")]
-position = Vector2(461, 109)
+[node name="BulletEnemy9" parent="Enemies" instance=ExtResource("16_7kftf")]
+position = Vector2(799, -104)
 
-[node name="BulletEnemy8" parent="." instance=ExtResource("16_7kftf")]
-position = Vector2(535, -107)
+[node name="SpreadEnemy" parent="Enemies" instance=ExtResource("17_rqrxh")]
+position = Vector2(410, 5)
 
-[node name="BulletEnemy9" parent="." instance=ExtResource("16_7kftf")]
-position = Vector2(726, -109)
+[node name="SpreadEnemy3" parent="Enemies" instance=ExtResource("17_rqrxh")]
+position = Vector2(656, 18)
 
-[node name="SpreadEnemy" parent="." instance=ExtResource("17_rqrxh")]
-position = Vector2(323, -12)
+[node name="SpreadEnemy4" parent="Enemies" instance=ExtResource("17_rqrxh")]
+position = Vector2(697, -54)
 
-[node name="SpreadEnemy3" parent="." instance=ExtResource("17_rqrxh")]
-position = Vector2(583, 13)
+[node name="SpreadEnemy5" parent="Enemies" instance=ExtResource("17_rqrxh")]
+position = Vector2(817, 46)
 
-[node name="SpreadEnemy4" parent="." instance=ExtResource("17_rqrxh")]
-position = Vector2(624, -59)
+[node name="SpreadEnemy6" parent="Enemies" instance=ExtResource("17_rqrxh")]
+position = Vector2(1117, 66)
 
-[node name="SpreadEnemy5" parent="." instance=ExtResource("17_rqrxh")]
-position = Vector2(744, 41)
+[node name="SpreadEnemy7" parent="Enemies" instance=ExtResource("17_rqrxh")]
+position = Vector2(1114, -23)
 
-[node name="SpreadEnemy6" parent="." instance=ExtResource("17_rqrxh")]
-position = Vector2(1044, 61)
+[node name="SpreadEnemy8" parent="Enemies" instance=ExtResource("17_rqrxh")]
+position = Vector2(851, -54)
 
-[node name="SpreadEnemy7" parent="." instance=ExtResource("17_rqrxh")]
-position = Vector2(1041, -28)
+[node name="SpreadEnemyBig" parent="Enemies" instance=ExtResource("18_0dywr")]
+position = Vector2(471, 84)
 
-[node name="SpreadEnemy8" parent="." instance=ExtResource("17_rqrxh")]
-position = Vector2(778, -59)
+[node name="SpreadEnemyBig2" parent="Enemies" instance=ExtResource("18_0dywr")]
+position = Vector2(732, 92)
 
-[node name="SpreadEnemyBig" parent="." instance=ExtResource("18_0dywr")]
-position = Vector2(378, 78)
+[node name="SpreadEnemyBig3" parent="Enemies" instance=ExtResource("18_0dywr")]
+position = Vector2(987, 94)
 
-[node name="SpreadEnemyBig2" parent="." instance=ExtResource("18_0dywr")]
-position = Vector2(659, 87)
+[node name="MissileEnemy" parent="Enemies" instance=ExtResource("19_gfsfg")]
+position = Vector2(504, -36)
 
-[node name="SpreadEnemyBig3" parent="." instance=ExtResource("18_0dywr")]
-position = Vector2(914, 89)
+[node name="MissileEnemy2" parent="Enemies" instance=ExtResource("19_gfsfg")]
+position = Vector2(904, -22)
 
-[node name="MissileEnemy" parent="." instance=ExtResource("19_gfsfg")]
-position = Vector2(431, -41)
+[node name="MissileEnemy3" parent="Enemies" instance=ExtResource("19_gfsfg")]
+position = Vector2(1047, 87)
 
-[node name="MissileEnemy2" parent="." instance=ExtResource("19_gfsfg")]
-position = Vector2(831, -27)
+[node name="MissileEnemy4" parent="Enemies" instance=ExtResource("19_gfsfg")]
+position = Vector2(1185, -6)
 
-[node name="MissileEnemy3" parent="." instance=ExtResource("19_gfsfg")]
-position = Vector2(974, 82)
-
-[node name="MissileEnemy4" parent="." instance=ExtResource("19_gfsfg")]
-position = Vector2(1112, -11)
-
-[node name="SpreadEnemy2" parent="." instance=ExtResource("17_rqrxh")]
-position = Vector2(511, 34)
-
-[node name="Gear" parent="." instance=ExtResource("21_2amam")]
-position = Vector2(367, -1)
-
-[node name="DrillObstacle" parent="." instance=ExtResource("23_nfumk")]
-position = Vector2(137, -163)
-
-[node name="Gear2" parent="." instance=ExtResource("25_b3jvq")]
-position = Vector2(126, -2)
-
-[node name="Gear3" parent="." instance=ExtResource("25_b3jvq")]
-position = Vector2(996, 0)
-rotation = 3.14159
+[node name="SpreadEnemy2" parent="Enemies" instance=ExtResource("17_rqrxh")]
+position = Vector2(584, 39)

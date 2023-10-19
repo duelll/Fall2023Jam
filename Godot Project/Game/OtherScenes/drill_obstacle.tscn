@@ -35,22 +35,23 @@ animations = [{
 
 [node name="DrillObstacle" type="StaticBody2D"]
 texture_filter = 1
+position = Vector2(1, -1)
 script = ExtResource("1_mllbp")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(129, 98)
+position = Vector2(-1, 0)
 sprite_frames = SubResource("SpriteFrames_mo65v")
 script = ExtResource("3_oirhj")
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(128, 94)
+position = Vector2(112, 99)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-position = Vector2(-1, 0)
-polygon = PackedVector2Array(-72, 32, 22, -61, 66, -58, 4, 8, -45, 55, -78, 58)
+position = Vector2(-114, -105)
+polygon = PackedVector2Array(-72, 32, 22, -61, 66, -58, 15, -1, 4, 8, -45, 55, -78, 58)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
-position = Vector2(145, 76)
+position = Vector2(15, -23)
 polygon = PackedVector2Array(-87, 51, 6, -41, 42, -37, 2, 6, -15, 21, -62, 67, -91, 73)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

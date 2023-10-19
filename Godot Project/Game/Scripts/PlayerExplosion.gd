@@ -9,7 +9,7 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if(body.is_in_group("enemy_kill")):
-		body.health -= 3
+		body.take_damage(3)
 
 func _on_animated_sprite_2d_animation_finished():
 	queue_free()

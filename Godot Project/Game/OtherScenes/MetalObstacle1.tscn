@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://clurhgdf3wvra"]
+[gd_scene load_steps=8 format=3 uid="uid://clurhgdf3wvra"]
 
 [ext_resource type="Script" path="res://Game/Scripts/Obstacle.gd" id="1_n1aob"]
 [ext_resource type="Texture2D" uid="uid://cfy50ychipqys" path="res://Game/Sprites/Space_Game_Mechanical_Obstacle.png" id="2_tok4s"]
 [ext_resource type="Script" path="res://Game/Scripts/GearSprite.gd" id="3_olq7p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p3arb"]
-size = Vector2(17, 24.5)
+size = Vector2(12.625, 27.5625)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4gudp"]
 atlas = ExtResource("2_tok4s")
@@ -22,24 +22,28 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Gear" type="StaticBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kxggo"]
+radius = 5.0
+height = 28.0
+
+[node name="MetalObstacle1" type="StaticBody2D"]
 texture_filter = 1
 script = ExtResource("1_n1aob")
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(128, 94)
+position = Vector2(1, 1)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_p3arb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(128, 94)
+position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_xmtf8")
 script = ExtResource("3_olq7p")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
-position = Vector2(128, 95)
-shape = SubResource("RectangleShape2D_p3arb")
+position = Vector2(1, 1)
+shape = SubResource("CapsuleShape2D_kxggo")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

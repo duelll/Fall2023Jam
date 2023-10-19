@@ -2,7 +2,7 @@ extends AnimatableBody2D
 
 @export var enemy_bullet : PackedScene
 @export var health = 2
-@onready var Player = get_parent().get_node("MainCamera").get_node("Player")
+@onready var Player = get_tree().current_scene.get_node("MainCamera").get_node("Player")
 
 var death_processed = false
 
@@ -14,16 +14,6 @@ func _ready():
 func _process(delta):
 	var a = position.direction_to(Player.global_position).angle()
 	rotation = snapped(a, PI/4)
-	
-	if (health < 1):
-		if death_processed == false:
-			$Area2D.queue_free()
-			$CollisionShape2D.queue_free()
-			$ShootLocation.queue_free()
-			death_processed = true
-		$AnimatedSprite2D.play("death")
-		await $AnimatedSprite2D.animation_finished
-		queue_free()
 	
 func _on_timer_timeout():
 	shoot()
@@ -47,5 +37,17 @@ func actually_shoot():
 
 func _on_area_2d_body_entered(body):
 	if(body.is_in_group("player")):
-		get_tree().reload_current_scene()
+		body.death()
 
+func take_damage(amount):
+	health -= amount
+	
+	if (health < 1):
+		if death_processed == false:
+			$Area2D.queue_free()
+			$CollisionShape2D.queue_free()
+			$ShootLocation.queue_free()
+			death_processed = true
+		$AnimatedSprite2D.play("death")
+		await $AnimatedSprite2D.animation_finished
+		queue_free()

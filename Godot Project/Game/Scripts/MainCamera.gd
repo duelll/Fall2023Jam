@@ -4,7 +4,7 @@ extends Camera2D
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	position.x += scroll_speed * delta
 	
 func horizontal_scroll():

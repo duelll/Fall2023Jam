@@ -9,7 +9,7 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if(body.is_in_group("enemy_kill")):
-		body.health -= 1
+		body.take_damage(1)
 	
 	queue_free()
 

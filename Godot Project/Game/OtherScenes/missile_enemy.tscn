@@ -60,7 +60,6 @@ shape = SubResource("RectangleShape2D_ras1d")
 texture_filter = 1
 rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_qo6lj")
-animation = &"death"
 script = ExtResource("5_cnkh5")
 
 [node name="ShootLocation" type="Marker2D" parent="."]
