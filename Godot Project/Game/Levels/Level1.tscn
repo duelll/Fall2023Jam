@@ -252,7 +252,7 @@ position = Vector2(504, -36)
 position = Vector2(904, -22)
 
 [node name="MissileEnemy3" parent="Enemies" instance=ExtResource("19_gfsfg")]
-position = Vector2(1047, 87)
+position = Vector2(1073, 40)
 
 [node name="MissileEnemy4" parent="Enemies" instance=ExtResource("19_gfsfg")]
 position = Vector2(1185, -6)
