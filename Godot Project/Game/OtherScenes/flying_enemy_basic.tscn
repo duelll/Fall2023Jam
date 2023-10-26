@@ -1,25 +1,29 @@
-[gd_scene load_steps=12 format=3 uid="uid://sgy7tqnup0hn"]
+[gd_scene load_steps=13 format=3 uid="uid://viyb6a5pyr1"]
 
-[ext_resource type="Script" path="res://Game/Scripts/BulletEnemy.gd" id="1_rie6m"]
-[ext_resource type="PackedScene" uid="uid://bfj75i0gn5ick" path="res://Game/OtherScenes/enemy_bullet.tscn" id="2_yjaij"]
-[ext_resource type="Texture2D" uid="uid://br8fnqya4gq82" path="res://Game/Sprites/Space_Game_Enemy_Death_Sparks.png" id="3_lv0gd"]
-[ext_resource type="Texture2D" uid="uid://dn4b3m13uxaqq" path="res://Game/Sprites/SmallBulletEnemy.png" id="3_oktuo"]
-[ext_resource type="Script" path="res://Game/Scripts/SetAnimationDefault.gd" id="5_sujf6"]
+[ext_resource type="Script" path="res://Game/Scripts/FlyingEnemyBasic.gd" id="1_gb2hd"]
+[ext_resource type="PackedScene" uid="uid://bfj75i0gn5ick" path="res://Game/OtherScenes/enemy_bullet.tscn" id="2_rl57a"]
+[ext_resource type="Texture2D" uid="uid://br8fnqya4gq82" path="res://Game/Sprites/Space_Game_Enemy_Death_Sparks.png" id="3_ker1x"]
+[ext_resource type="Texture2D" uid="uid://c87kebhcrgrf3" path="res://Game/Sprites/FlyingEnemyBasic.png" id="4_wx7rs"]
+[ext_resource type="Script" path="res://Game/OtherScenes/SetAnimationDefaultRotationLock.gd" id="5_rqgls"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sylvt"]
-size = Vector2(15, 13.5)
+size = Vector2(12, 12)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_02it4"]
-atlas = ExtResource("3_lv0gd")
+atlas = ExtResource("3_ker1x")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ac6lk"]
-atlas = ExtResource("3_lv0gd")
+atlas = ExtResource("3_ker1x")
 region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_olpng"]
-atlas = ExtResource("3_oktuo")
+[sub_resource type="AtlasTexture" id="AtlasTexture_8sua0"]
+atlas = ExtResource("4_wx7rs")
 region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77vrq"]
+atlas = ExtResource("4_wx7rs")
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gn1wo"]
 animations = [{
@@ -36,7 +40,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_olpng")
+"texture": SubResource("AtlasTexture_8sua0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77vrq")
 }],
 "loop": true,
 "name": &"default",
@@ -44,38 +51,37 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rq4go"]
-size = Vector2(17, 16)
+size = Vector2(14, 14)
 
-[node name="BulletEnemy" type="AnimatableBody2D" groups=["bullet_enemy", "capturable_enemies", "enemy_kill"]]
-position = Vector2(100, -41)
+[node name="FlyingEnemyBasic" type="AnimatableBody2D" groups=["bullet_enemy", "capturable_enemies", "enemy_kill"]]
 collision_layer = 2
-collision_mask = 3
-script = ExtResource("1_rie6m")
-enemy_bullet = ExtResource("2_yjaij")
+collision_mask = 0
+sync_to_physics = false
+script = ExtResource("1_gb2hd")
+enemy_bullet = ExtResource("2_rl57a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemy_hitbox"]]
-position = Vector2(0, 0.75)
 shape = SubResource("RectangleShape2D_sylvt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_gn1wo")
-script = ExtResource("5_sujf6")
+script = ExtResource("5_rqgls")
 
 [node name="ShootLocation" type="Marker2D" parent="."]
-position = Vector2(13, 0)
+position = Vector2(8, 0)
 rotation = 3.14159
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["enemy_hitbox"]]
-position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_rq4go")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 1.75
+wait_time = 0.3
+one_shot = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 

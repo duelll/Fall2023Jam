@@ -48,6 +48,8 @@ size = Vector2(35, 53.7488)
 
 [node name="SpreadEnemyBig" type="AnimatableBody2D" groups=["enemy_kill"]]
 position = Vector2(100, -41)
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_l7kvh")
 enemy_bullet = ExtResource("2_qyd3i")
 
@@ -73,7 +75,10 @@ shape = SubResource("RectangleShape2D_sylvt")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
-autostart = true
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

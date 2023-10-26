@@ -11,7 +11,6 @@ enum CaptureStates
 	RETURNING_BULLET = 6, 
 	RETURNING_MISSILE = 7,
 	RETURNING_SPREAD = 8,
-	
 }
 
 var state = CaptureStates.IDLE

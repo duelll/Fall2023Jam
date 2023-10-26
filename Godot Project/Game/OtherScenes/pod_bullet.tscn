@@ -9,6 +9,8 @@ height = 8.0
 
 [node name="PodBullet" type="Area2D" groups=["pod_bullets"]]
 position = Vector2(2, -2)
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_p032p")
 speed = 200
 

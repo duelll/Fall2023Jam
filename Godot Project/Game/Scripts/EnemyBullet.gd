@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var speed = 20
+@export var speed = 30
 @export var color = "pink"
 
 func _ready():
