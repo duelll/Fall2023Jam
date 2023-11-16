@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://du8vn3waj17sp"]
+[gd_scene load_steps=29 format=3 uid="uid://du8vn3waj17sp"]
 
 [ext_resource type="Texture2D" uid="uid://5jhg57r0ucxj" path="res://Game/Sprites/Background.png" id="1_rpbm6"]
 [ext_resource type="Texture2D" uid="uid://x3nmwa00su81" path="res://Game/Sprites/StalaBottom.png" id="2_5ps5e"]
@@ -8,10 +8,13 @@
 [ext_resource type="Script" path="res://Game/Scripts/SetAnimationDefault.gd" id="4_7l5cj"]
 [ext_resource type="Script" path="res://Game/Scripts/MainCamera.gd" id="4_ap1ai"]
 [ext_resource type="PackedScene" uid="uid://i1n5kgbsur5f" path="res://Game/OtherScenes/player.tscn" id="5_je4o6"]
+[ext_resource type="Script" path="res://Game/Levels/EventArea.gd" id="9_lmwo8"]
+[ext_resource type="Script" path="res://Game/Levels/SpeedChange.gd" id="10_ljqqj"]
 [ext_resource type="PackedScene" uid="uid://sgy7tqnup0hn" path="res://Game/OtherScenes/bullet_enemy.tscn" id="16_7kftf"]
 [ext_resource type="PackedScene" uid="uid://viyb6a5pyr1" path="res://Game/OtherScenes/flying_enemy_basic.tscn" id="16_fka1f"]
 [ext_resource type="PackedScene" uid="uid://qlfmnpmog0lr" path="res://Game/OtherScenes/big_stal_obstacle_1.tscn" id="16_nsenj"]
 [ext_resource type="PackedScene" uid="uid://bgw6jol0dpw6a" path="res://Game/OtherScenes/spread_enemy.tscn" id="17_rqrxh"]
+[ext_resource type="PackedScene" uid="uid://qy2ytr36e25b" path="res://Game/OtherScenes/boss_1.tscn" id="17_wr556"]
 [ext_resource type="PackedScene" uid="uid://dr4was1w3x7a1" path="res://Game/OtherScenes/spread_enemy_big.tscn" id="18_0dywr"]
 [ext_resource type="PackedScene" uid="uid://m8govf7lymjr" path="res://Game/OtherScenes/missile_enemy.tscn" id="19_gfsfg"]
 [ext_resource type="PackedScene" uid="uid://cvn7og7jcwte1" path="res://Game/OtherScenes/gear.tscn" id="21_2amam"]
@@ -57,6 +60,8 @@ b = Vector2(3, 97)
 a = Vector2(-4, -110)
 b = Vector2(-4, 112)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ikv4"]
+
 [node name="Level1" type="Node2D"]
 
 [node name="WinArea" type="Area2D" parent="." groups=["win"]]
@@ -64,7 +69,7 @@ position = Vector2(1829, 26.5)
 scale = Vector2(-1, 13.9201)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WinArea"]
-position = Vector2(25, -1.65229)
+position = Vector2(-463, -1.83188)
 shape = SubResource("RectangleShape2D_i1k0k")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -127,7 +132,6 @@ texture = ExtResource("3_h43os")
 [node name="MainCamera" type="Camera2D" parent="."]
 process_callback = 0
 script = ExtResource("4_ap1ai")
-scroll_speed = 30.0
 
 [node name="Player" parent="MainCamera" instance=ExtResource("5_je4o6")]
 texture_filter = 1
@@ -154,6 +158,20 @@ shape = SubResource("SegmentShape2D_jb1uu")
 [node name="EastWall" type="CollisionShape2D" parent="MainCamera/Camera Boundary/StaticBody2D"]
 position = Vector2(129, -113)
 shape = SubResource("SegmentShape2D_kt2lq")
+
+[node name="EventArea" type="Area2D" parent="MainCamera" groups=["EventArea"]]
+script = ExtResource("9_lmwo8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainCamera/EventArea"]
+shape = SubResource("CircleShape2D_2ikv4")
+
+[node name="BossStopArea" type="Area2D" parent="." groups=["speedChange"]]
+position = Vector2(79, 0)
+script = ExtResource("10_ljqqj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossStopArea" groups=["speedChange"]]
+position = Vector2(234, 0)
+shape = SubResource("CircleShape2D_2ikv4")
 
 [node name="Terrain" type="Node2D" parent="."]
 
@@ -359,3 +377,8 @@ preretreatVector = Vector2(1.5, 1.5)
 [node name="FlyingEnemyBasic25" parent="Enemies" instance=ExtResource("16_fka1f")]
 position = Vector2(667, -51)
 preretreatVector = Vector2(1.5, 1.5)
+
+[node name="Boss1" parent="Enemies" instance=ExtResource("17_wr556")]
+position = Vector2(212, 2)
+
+[connection signal="area_entered" from="MainCamera/EventArea" to="MainCamera/EventArea" method="_on_area_entered"]

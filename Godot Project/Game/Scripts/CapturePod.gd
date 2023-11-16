@@ -69,6 +69,7 @@ func get_input():
 func _on_body_entered(body):
 	if (state == CaptureStates.FIRING):
 		if body.is_in_group("capturable_enemies"):
+			body.take_damage(10)
 			if body.is_in_group("bullet_enemy"):
 				state = CaptureStates.RETURNING_BULLET
 				$AnimatedSprite2D.play("bullet")
@@ -98,8 +99,6 @@ func _on_area_entered(area):
 	if state == CaptureStates.FIRING:
 		if area.is_in_group("pod_limit"):
 			state = CaptureStates.RETURNING
-	if area.is_in_group("win"):
-		get_tree().change_scene_to_file("res://Menus/EndScreen.tscn")
 
 func _on_capture_timer_timeout():
 	state = CaptureStates.IDLE

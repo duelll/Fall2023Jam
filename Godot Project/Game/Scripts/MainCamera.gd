@@ -1,6 +1,6 @@
 extends Camera2D
 
-@export var scroll_speed = 0.5
+@export var scroll_speed = 27
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://c45pkny453kwr"]
+
+[ext_resource type="Script" path="res://Game/Scripts/PlayerBullet.gd" id="1_qeala"]
+[ext_resource type="Texture2D" uid="uid://cnhmhv7tpyjjb" path="res://Game/Sprites/Beam.png" id="2_rijsr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0xgv3"]
+radius = 22.0
+height = 100.0
+
+[node name="PlayerBullet" type="Area2D" groups=["player_bullets"]]
+position = Vector2(2, -2)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_qeala")
+speed = 200
+
+[node name="BulletHitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_0xgv3")
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1.48382, -0.191724)
+texture = ExtResource("2_rijsr")
+region_rect = Rect2(17, 20, 18, 18)
+
+[node name="ScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2, -1)
+scale = Vector2(0.7, 0.3)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
