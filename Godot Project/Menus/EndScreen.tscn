@@ -36,4 +36,13 @@ offset_right = 227.0
 offset_bottom = 211.0
 icon = ExtResource("3_82jv6")
 
+[node name="LinkButton" type="LinkButton" parent="."]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 143.0
+offset_right = 154.0
+offset_bottom = 170.0
+text = "SURVEY"
+uri = "https://docs.google.com/forms/d/e/1FAIpQLSezohoWE1MAzStOORxH4fbc53QAXP6_LY52wxoWokxbY0TMsg/viewform?usp=sf_link"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

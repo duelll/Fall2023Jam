@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://du8vn3waj17sp"]
+[gd_scene load_steps=28 format=3 uid="uid://du8vn3waj17sp"]
 
 [ext_resource type="Texture2D" uid="uid://5jhg57r0ucxj" path="res://Game/Sprites/Background.png" id="1_rpbm6"]
 [ext_resource type="Texture2D" uid="uid://x3nmwa00su81" path="res://Game/Sprites/StalaBottom.png" id="2_5ps5e"]
@@ -19,8 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://m8govf7lymjr" path="res://Game/OtherScenes/missile_enemy.tscn" id="19_gfsfg"]
 [ext_resource type="PackedScene" uid="uid://cvn7og7jcwte1" path="res://Game/OtherScenes/gear.tscn" id="21_2amam"]
 [ext_resource type="PackedScene" uid="uid://gkd8l7udo10q" path="res://Game/OtherScenes/drill_obstacle.tscn" id="23_nfumk"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i1k0k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3m1wy"]
 atlas = ExtResource("3_8wbwa")
@@ -64,14 +62,6 @@ b = Vector2(-4, 112)
 
 [node name="Level1" type="Node2D"]
 
-[node name="WinArea" type="Area2D" parent="." groups=["win"]]
-position = Vector2(1829, 26.5)
-scale = Vector2(-1, 13.9201)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WinArea"]
-position = Vector2(-463, -1.83188)
-shape = SubResource("RectangleShape2D_i1k0k")
-
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_limit_end = Vector2(10000, 0)
 
@@ -101,7 +91,7 @@ position = Vector2(422, -85)
 texture = ExtResource("2_l6hd7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2(925, 4.5)
+position = Vector2(770, 4)
 sprite_frames = SubResource("SpriteFrames_0f2dg")
 script = ExtResource("4_7l5cj")
 
@@ -130,7 +120,6 @@ position = Vector2(129, -111)
 texture = ExtResource("3_h43os")
 
 [node name="MainCamera" type="Camera2D" parent="."]
-process_callback = 0
 script = ExtResource("4_ap1ai")
 
 [node name="Player" parent="MainCamera" instance=ExtResource("5_je4o6")]
@@ -166,11 +155,11 @@ script = ExtResource("9_lmwo8")
 shape = SubResource("CircleShape2D_2ikv4")
 
 [node name="BossStopArea" type="Area2D" parent="." groups=["speedChange"]]
-position = Vector2(79, 0)
+position = Vector2(1902, 0)
 script = ExtResource("10_ljqqj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossStopArea" groups=["speedChange"]]
-position = Vector2(234, 0)
+position = Vector2(30, 0)
 shape = SubResource("CircleShape2D_2ikv4")
 
 [node name="Terrain" type="Node2D" parent="."]
@@ -190,6 +179,13 @@ position = Vector2(980, 5)
 
 [node name="DrillObstacle" parent="Terrain" instance=ExtResource("23_nfumk")]
 position = Vector2(882, -49)
+
+[node name="Gear2" parent="Terrain" instance=ExtResource("21_2amam")]
+position = Vector2(1815, -9)
+
+[node name="Gear3" parent="Terrain" instance=ExtResource("21_2amam")]
+position = Vector2(2070, 17)
+rotation = 3.14159
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -379,6 +375,6 @@ position = Vector2(667, -51)
 preretreatVector = Vector2(1.5, 1.5)
 
 [node name="Boss1" parent="Enemies" instance=ExtResource("17_wr556")]
-position = Vector2(212, 2)
+position = Vector2(2035, 2)
 
 [connection signal="area_entered" from="MainCamera/EventArea" to="MainCamera/EventArea" method="_on_area_entered"]
