@@ -1,0 +1,382 @@
+[gd_scene load_steps=28 format=3 uid="uid://cpoaa68bxhr6t"]
+
+[ext_resource type="Texture2D" uid="uid://5jhg57r0ucxj" path="res://Game/Sprites/Background.png" id="1_vlrx6"]
+[ext_resource type="Texture2D" uid="uid://d3y7rybgn1h5x" path="res://Game/Sprites/Grass.png" id="2_878bf"]
+[ext_resource type="Texture2D" uid="uid://cede0wuj4cj3a" path="res://Game/Sprites/Waterfall.png" id="3_oovk0"]
+[ext_resource type="Script" path="res://Game/Scripts/SetAnimationDefault.gd" id="4_724bc"]
+[ext_resource type="Texture2D" uid="uid://x3nmwa00su81" path="res://Game/Sprites/StalaBottom.png" id="5_11c0x"]
+[ext_resource type="Texture2D" uid="uid://m0jqrrv1exij" path="res://Game/Sprites/StalaTop.png" id="6_n8o07"]
+[ext_resource type="Script" path="res://Game/Scripts/MainCamera.gd" id="7_oels1"]
+[ext_resource type="PackedScene" uid="uid://i1n5kgbsur5f" path="res://Game/OtherScenes/player.tscn" id="8_1teoa"]
+[ext_resource type="Script" path="res://Game/Levels/EventArea.gd" id="9_d0sok"]
+[ext_resource type="Script" path="res://Game/Levels/SpeedChange.gd" id="10_nule7"]
+[ext_resource type="PackedScene" uid="uid://qlfmnpmog0lr" path="res://Game/OtherScenes/big_stal_obstacle_1.tscn" id="11_580te"]
+[ext_resource type="PackedScene" uid="uid://cvn7og7jcwte1" path="res://Game/OtherScenes/gear.tscn" id="12_12igy"]
+[ext_resource type="PackedScene" uid="uid://gkd8l7udo10q" path="res://Game/OtherScenes/drill_obstacle.tscn" id="13_e56p3"]
+[ext_resource type="PackedScene" uid="uid://sgy7tqnup0hn" path="res://Game/OtherScenes/bullet_enemy.tscn" id="14_ymkcp"]
+[ext_resource type="PackedScene" uid="uid://bgw6jol0dpw6a" path="res://Game/OtherScenes/spread_enemy.tscn" id="15_okedl"]
+[ext_resource type="PackedScene" uid="uid://dr4was1w3x7a1" path="res://Game/OtherScenes/spread_enemy_big.tscn" id="16_tolqq"]
+[ext_resource type="PackedScene" uid="uid://m8govf7lymjr" path="res://Game/OtherScenes/missile_enemy.tscn" id="17_7hc0l"]
+[ext_resource type="PackedScene" uid="uid://viyb6a5pyr1" path="res://Game/OtherScenes/flying_enemy_basic.tscn" id="18_aoxxl"]
+[ext_resource type="PackedScene" uid="uid://qy2ytr36e25b" path="res://Game/OtherScenes/boss_1.tscn" id="19_24x8n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3m1wy"]
+atlas = ExtResource("3_oovk0")
+region = Rect2(0, 0, 82, 235)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_413ni"]
+atlas = ExtResource("3_oovk0")
+region = Rect2(82, 0, 82, 235)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0f2dg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3m1wy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_413ni")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qor5w"]
+a = Vector2(126, -1)
+b = Vector2(-132, -1)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_g663k"]
+a = Vector2(136, 16)
+b = Vector2(-121, 16)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_jb1uu"]
+a = Vector2(3, -127)
+b = Vector2(3, 97)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_kt2lq"]
+a = Vector2(-4, -110)
+b = Vector2(-4, 112)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ikv4"]
+
+[node name="Level1" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_limit_end = Vector2(10000, 0)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+z_index = -2
+position = Vector2(-128, 0)
+motion_scale = Vector2(0.25, 1)
+motion_mirroring = Vector2(256, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+z_index = -2
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(128, 0)
+texture = ExtResource("1_vlrx6")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+z_index = -2
+position = Vector2(-127, 1)
+motion_scale = Vector2(0.25, 1)
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+z_index = -1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(422, -85)
+texture = ExtResource("2_878bf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(770, 4)
+sprite_frames = SubResource("SpriteFrames_0f2dg")
+script = ExtResource("4_724bc")
+
+[node name="ParallaxForeground" type="ParallaxBackground" parent="."]
+layer = 100
+scroll_limit_end = Vector2(10000, 0)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxForeground"]
+z_index = 1
+position = Vector2(-130, 0)
+motion_scale = Vector2(1.1, 1)
+motion_mirroring = Vector2(256, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxForeground/ParallaxLayer2"]
+z_index = 1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(129, 106)
+texture = ExtResource("5_11c0x")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxForeground/ParallaxLayer2"]
+z_index = 1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(129, -111)
+texture = ExtResource("6_n8o07")
+
+[node name="MainCamera" type="Camera2D" parent="."]
+position = Vector2(1782, 0)
+script = ExtResource("7_oels1")
+
+[node name="Player" parent="MainCamera" instance=ExtResource("8_1teoa")]
+texture_filter = 1
+speed = 120
+max_bullets = 3
+
+[node name="Camera Boundary" type="CanvasGroup" parent="MainCamera"]
+position = Vector2(132, -2)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="MainCamera/Camera Boundary" groups=["camera_boundary"]]
+position = Vector2(-129, 114)
+
+[node name="SouthWall" type="CollisionShape2D" parent="MainCamera/Camera Boundary/StaticBody2D"]
+position = Vector2(1, 0)
+shape = SubResource("SegmentShape2D_qor5w")
+
+[node name="NorthWall" type="CollisionShape2D" parent="MainCamera/Camera Boundary/StaticBody2D"]
+position = Vector2(-10, -240)
+shape = SubResource("SegmentShape2D_g663k")
+
+[node name="WestWall" type="CollisionShape2D" parent="MainCamera/Camera Boundary/StaticBody2D"]
+position = Vector2(-134, -97)
+shape = SubResource("SegmentShape2D_jb1uu")
+
+[node name="EastWall" type="CollisionShape2D" parent="MainCamera/Camera Boundary/StaticBody2D"]
+position = Vector2(129, -113)
+shape = SubResource("SegmentShape2D_kt2lq")
+
+[node name="EventArea" type="Area2D" parent="MainCamera" groups=["EventArea"]]
+script = ExtResource("9_d0sok")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainCamera/EventArea"]
+shape = SubResource("CircleShape2D_2ikv4")
+
+[node name="BossStopArea" type="Area2D" parent="." groups=["speedChange"]]
+position = Vector2(1902, 0)
+script = ExtResource("10_nule7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossStopArea" groups=["speedChange"]]
+position = Vector2(30, 0)
+shape = SubResource("CircleShape2D_2ikv4")
+
+[node name="Terrain" type="Node2D" parent="."]
+
+[node name="BigStalObstacle1" parent="Terrain" instance=ExtResource("11_580te")]
+position = Vector2(1109, -80)
+
+[node name="BigStalObstacle3" parent="Terrain" instance=ExtResource("11_580te")]
+position = Vector2(1417, -98)
+
+[node name="BigStalObstacle2" parent="Terrain" instance=ExtResource("11_580te")]
+position = Vector2(1454, 110)
+rotation = -3.14159
+
+[node name="Gear" parent="Terrain" instance=ExtResource("12_12igy")]
+position = Vector2(980, 5)
+
+[node name="DrillObstacle" parent="Terrain" instance=ExtResource("13_e56p3")]
+position = Vector2(882, -49)
+
+[node name="Gear2" parent="Terrain" instance=ExtResource("12_12igy")]
+position = Vector2(1815, -9)
+
+[node name="Gear3" parent="Terrain" instance=ExtResource("12_12igy")]
+position = Vector2(2070, 17)
+rotation = 3.14159
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="BulletEnemy" parent="Enemies" instance=ExtResource("14_ymkcp")]
+position = Vector2(1072, -19)
+
+[node name="BulletEnemy2" parent="Enemies" instance=ExtResource("14_ymkcp")]
+position = Vector2(864, 50)
+
+[node name="BulletEnemy3" parent="Enemies" instance=ExtResource("14_ymkcp")]
+position = Vector2(1227, 62)
+
+[node name="BulletEnemy4" parent="Enemies" instance=ExtResource("14_ymkcp")]
+position = Vector2(1451, -102)
+
+[node name="BulletEnemy10" parent="Enemies" instance=ExtResource("14_ymkcp")]
+position = Vector2(1578, -109)
+
+[node name="BulletEnemy13" parent="Enemies" instance=ExtResource("14_ymkcp")]
+position = Vector2(1510, -109)
+rotation = -1.53295
+
+[node name="BulletEnemy15" parent="Enemies" instance=ExtResource("14_ymkcp")]
+position = Vector2(1576, -37)
+rotation = -1.53295
+
+[node name="BulletEnemy5" parent="Enemies" instance=ExtResource("14_ymkcp")]
+position = Vector2(1141, 117)
+
+[node name="BulletEnemy6" parent="Enemies" instance=ExtResource("14_ymkcp")]
+position = Vector2(1156, -47)
+
+[node name="BulletEnemy7" parent="Enemies" instance=ExtResource("14_ymkcp")]
+position = Vector2(1074, 115)
+
+[node name="BulletEnemy8" parent="Enemies" instance=ExtResource("14_ymkcp")]
+position = Vector2(1148, -101)
+
+[node name="BulletEnemy9" parent="Enemies" instance=ExtResource("14_ymkcp")]
+position = Vector2(1339, -103)
+
+[node name="SpreadEnemy" parent="Enemies" instance=ExtResource("15_okedl")]
+position = Vector2(950, 6)
+
+[node name="SpreadEnemy3" parent="Enemies" instance=ExtResource("15_okedl")]
+position = Vector2(1196, 19)
+
+[node name="SpreadEnemy4" parent="Enemies" instance=ExtResource("15_okedl")]
+position = Vector2(1237, -53)
+
+[node name="SpreadEnemy5" parent="Enemies" instance=ExtResource("15_okedl")]
+position = Vector2(1357, 47)
+
+[node name="SpreadEnemy6" parent="Enemies" instance=ExtResource("15_okedl")]
+position = Vector2(1657, 67)
+
+[node name="SpreadEnemy7" parent="Enemies" instance=ExtResource("15_okedl")]
+position = Vector2(1654, -22)
+
+[node name="SpreadEnemy8" parent="Enemies" instance=ExtResource("15_okedl")]
+position = Vector2(1391, -53)
+
+[node name="SpreadEnemyBig" parent="Enemies" instance=ExtResource("16_tolqq")]
+position = Vector2(1011, 85)
+
+[node name="SpreadEnemyBig2" parent="Enemies" instance=ExtResource("16_tolqq")]
+position = Vector2(1272, 93)
+
+[node name="SpreadEnemyBig3" parent="Enemies" instance=ExtResource("16_tolqq")]
+position = Vector2(1527, 95)
+
+[node name="MissileEnemy" parent="Enemies" instance=ExtResource("17_7hc0l")]
+position = Vector2(1044, -35)
+
+[node name="MissileEnemy2" parent="Enemies" instance=ExtResource("17_7hc0l")]
+position = Vector2(1444, -21)
+
+[node name="MissileEnemy3" parent="Enemies" instance=ExtResource("17_7hc0l")]
+position = Vector2(1613, 41)
+
+[node name="SpreadEnemy2" parent="Enemies" instance=ExtResource("15_okedl")]
+position = Vector2(1124, 40)
+
+[node name="FlyingEnemyBasicLine" type="Node2D" parent="Enemies"]
+position = Vector2(125, 1)
+
+[node name="FlyingEnemyBasic" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(327, 61)
+
+[node name="FlyingEnemyBasic2" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(339, 61)
+
+[node name="FlyingEnemyBasic3" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(375, 61)
+
+[node name="FlyingEnemyBasic4" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(363, 61)
+
+[node name="FlyingEnemyBasic5" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(351, 61)
+
+[node name="FlyingEnemyBasicLine2" type="Node2D" parent="Enemies"]
+position = Vector2(430, -51)
+
+[node name="FlyingEnemyBasic7" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(429, -51)
+preretreatVector = Vector2(1.5, 1.5)
+
+[node name="FlyingEnemyBasic6" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(441, -51)
+preretreatVector = Vector2(1.5, 1.5)
+
+[node name="FlyingEnemyBasic8" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(453, -51)
+preretreatVector = Vector2(1.5, 1.5)
+
+[node name="FlyingEnemyBasic9" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(465, -51)
+preretreatVector = Vector2(1.5, 1.5)
+
+[node name="FlyingEnemyBasic10" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(477, -51)
+preretreatVector = Vector2(1.5, 1.5)
+
+[node name="FlyingEnemyBasicLine3" type="Node2D" parent="Enemies"]
+position = Vector2(620, -51)
+
+[node name="FlyingEnemyBasic11" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(619, -51)
+preretreatVector = Vector2(1.5, 1.5)
+
+[node name="FlyingEnemyBasic12" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(631, -51)
+preretreatVector = Vector2(1.5, 1.5)
+
+[node name="FlyingEnemyBasic13" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(643, -51)
+preretreatVector = Vector2(1.5, 1.5)
+
+[node name="FlyingEnemyBasic14" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(655, -51)
+preretreatVector = Vector2(1.5, 1.5)
+
+[node name="FlyingEnemyBasic15" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(667, -51)
+preretreatVector = Vector2(1.5, 1.5)
+
+[node name="FlyingEnemyBasicLine4" type="Node2D" parent="Enemies"]
+position = Vector2(419, 1)
+
+[node name="FlyingEnemyBasic16" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(621, 61)
+
+[node name="FlyingEnemyBasic17" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(633, 61)
+
+[node name="FlyingEnemyBasic18" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(669, 61)
+
+[node name="FlyingEnemyBasic19" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(657, 61)
+
+[node name="FlyingEnemyBasic20" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(645, 61)
+
+[node name="FlyingEnemyBasicLine5" type="Node2D" parent="Enemies"]
+position = Vector2(620, -51)
+
+[node name="FlyingEnemyBasic21" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(619, -51)
+preretreatVector = Vector2(1.5, 1.5)
+
+[node name="FlyingEnemyBasic22" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(631, -51)
+preretreatVector = Vector2(1.5, 1.5)
+
+[node name="FlyingEnemyBasic23" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(643, -51)
+preretreatVector = Vector2(1.5, 1.5)
+
+[node name="FlyingEnemyBasic24" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(655, -51)
+preretreatVector = Vector2(1.5, 1.5)
+
+[node name="FlyingEnemyBasic25" parent="Enemies" instance=ExtResource("18_aoxxl")]
+position = Vector2(667, -51)
+preretreatVector = Vector2(1.5, 1.5)
+
+[node name="Boss1" parent="Enemies" instance=ExtResource("19_24x8n")]
+position = Vector2(2035, 2)
+
+[connection signal="area_entered" from="MainCamera/EventArea" to="MainCamera/EventArea" method="_on_area_entered"]

@@ -42,6 +42,15 @@ offset_right = 115.0
 offset_bottom = 128.0
 icon = ExtResource("2_qpehy")
 
+[node name="Play2" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 2
+offset_left = 157.0
+offset_top = 190.0
+offset_right = 257.0
+offset_bottom = 224.0
+text = "skip to boss"
+
 [node name="Credits" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 2
@@ -60,6 +69,20 @@ offset_right = 154.0
 offset_bottom = 189.0
 icon = ExtResource("5_4tb8k")
 
+[node name="LinkButton" type="LinkButton" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -36.0
+offset_right = 69.0
+offset_bottom = -9.0
+grow_vertical = 0
+text = "SURVEY"
+uri = "https://docs.google.com/forms/d/e/1FAIpQLSezohoWE1MAzStOORxH4fbc53QAXP6_LY52wxoWokxbY0TMsg/viewform?usp=sf_link"
+
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Play2" to="." method="_on_play_2_pressed"]
 [connection signal="pressed" from="Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

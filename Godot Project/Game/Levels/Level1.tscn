@@ -125,6 +125,7 @@ script = ExtResource("4_ap1ai")
 [node name="Player" parent="MainCamera" instance=ExtResource("5_je4o6")]
 texture_filter = 1
 speed = 120
+max_bullets = 3
 
 [node name="Camera Boundary" type="CanvasGroup" parent="MainCamera"]
 position = Vector2(132, -2)

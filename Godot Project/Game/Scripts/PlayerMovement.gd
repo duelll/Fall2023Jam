@@ -26,6 +26,8 @@ func get_input():
 		
 	if Input.is_action_just_pressed("shoot"):
 			shoot()
+	if Input.is_action_pressed("ExitToMenu"):
+		get_tree().change_scene_to_file("res://Menus/Main Menu.tscn")
 			
 func shoot():
 	var all_bullets = get_tree().get_nodes_in_group("player_bullets")

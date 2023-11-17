@@ -211,7 +211,6 @@ position = Vector2(12, -1)
 script = ExtResource("1_jo23b")
 speed = 127
 player_bullet = ExtResource("2_pde5s")
-max_bullets = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
