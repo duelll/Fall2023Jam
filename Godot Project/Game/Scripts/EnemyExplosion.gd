@@ -2,6 +2,7 @@ extends Area2D
 
 func _ready():
 	$AnimatedSprite2D.play("default")
+	$EnemyExplosionAudioPlayer.play()
 
 func _physics_process(delta):
 	if not get_node("ScreenNotifier").is_on_screen():

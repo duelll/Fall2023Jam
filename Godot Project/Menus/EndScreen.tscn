@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bki6e1l3iedp8"]
+[gd_scene load_steps=5 format=3 uid="uid://bki6e1l3iedp8"]
 
 [ext_resource type="Script" path="res://Menus/EndScreen.gd" id="1_bkb5h"]
 [ext_resource type="Texture2D" uid="uid://dy00rh4tkghc7" path="res://Game/Sprites/TitleScreen.png" id="2_r3g76"]
 [ext_resource type="Texture2D" uid="uid://1ltxybslfmt" path="res://Game/Sprites/MechaGrind_Back_Button.png" id="3_82jv6"]
+[ext_resource type="AudioStream" uid="uid://dgaxtbdboh4kc" path="res://Game/Audio/665205__silverillusionist__level-upmission-complete-primal-2.wav" id="4_exise"]
 
 [node name="EndScreen" type="Control"]
 layout_mode = 3
@@ -44,5 +45,10 @@ offset_right = 154.0
 offset_bottom = 170.0
 text = "SURVEY"
 uri = "https://docs.google.com/forms/d/e/1FAIpQLSezohoWE1MAzStOORxH4fbc53QAXP6_LY52wxoWokxbY0TMsg/viewform?usp=sf_link"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_exise")
+volume_db = -5.0
+autoplay = true
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://viyb6a5pyr1"]
+[gd_scene load_steps=14 format=3 uid="uid://viyb6a5pyr1"]
 
 [ext_resource type="Script" path="res://Game/Scripts/FlyingEnemyBasic.gd" id="1_gb2hd"]
 [ext_resource type="PackedScene" uid="uid://bfj75i0gn5ick" path="res://Game/OtherScenes/enemy_bullet.tscn" id="2_rl57a"]
 [ext_resource type="Texture2D" uid="uid://br8fnqya4gq82" path="res://Game/Sprites/Space_Game_Enemy_Death_Sparks.png" id="3_ker1x"]
 [ext_resource type="Texture2D" uid="uid://c87kebhcrgrf3" path="res://Game/Sprites/FlyingEnemyBasic.png" id="4_wx7rs"]
 [ext_resource type="Script" path="res://Game/OtherScenes/SetAnimationDefaultRotationLock.gd" id="5_rqgls"]
+[ext_resource type="AudioStream" uid="uid://dnvqrvt7gi2dv" path="res://Game/Audio/hitHurt.wav" id="6_qyyo5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sylvt"]
 size = Vector2(12, 12)
@@ -84,6 +85,10 @@ wait_time = 0.3
 one_shot = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="EnemyDeathAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_qyyo5")
+volume_db = -10.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

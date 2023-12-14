@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgw6jol0dpw6a"]
+[gd_scene load_steps=12 format=3 uid="uid://bgw6jol0dpw6a"]
 
 [ext_resource type="Script" path="res://Game/Scripts/SpreadEnemy.gd" id="1_5y4ue"]
 [ext_resource type="PackedScene" uid="uid://bfj75i0gn5ick" path="res://Game/OtherScenes/enemy_bullet.tscn" id="2_26c8j"]
 [ext_resource type="Texture2D" uid="uid://br8fnqya4gq82" path="res://Game/Sprites/Space_Game_Enemy_Death_Sparks.png" id="3_7ndfh"]
 [ext_resource type="Texture2D" uid="uid://dpgrhmt8tg1q7" path="res://Game/Sprites/SmallSpreadEnemy.png" id="3_gjm5s"]
 [ext_resource type="Script" path="res://Game/Scripts/SetAnimationDefault.gd" id="5_v32hq"]
+[ext_resource type="AudioStream" uid="uid://dnvqrvt7gi2dv" path="res://Game/Audio/hitHurt.wav" id="6_luch1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sylvt"]
 size = Vector2(15, 15)
@@ -73,6 +74,10 @@ shape = SubResource("RectangleShape2D_sylvt")
 wait_time = 3.0
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="EnemyDeathAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_luch1")
+volume_db = -10.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

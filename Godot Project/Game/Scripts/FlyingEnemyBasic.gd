@@ -72,6 +72,7 @@ func take_damage(amount):
 	
 	if (health < 1):
 		if death_processed == false:
+			$EnemyDeathAudioPlayer.play()
 			state = States.IDLE
 			$Area2D.queue_free()
 			$CollisionShape2D.queue_free()

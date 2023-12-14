@@ -36,11 +36,14 @@ func shoot():
 
 func actually_shoot():
 	var inst = player_bullet.instantiate()
+	$ShootAudioPlayer.play()
 	get_tree().current_scene.add_child(inst)
 	#inst.transform = $FrontBarrel.global_transform
 	inst.set_position($FrontBarrel.get_global_position())
 	
 func death():
+	get_parent().scroll_speed = 0
+	$DeathAudioPlayer.play()
 	can_move = false
 	$AnimatedSprite2D.play("death")
 	await $AnimatedSprite2D.animation_finished

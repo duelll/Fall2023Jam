@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cpoaa68bxhr6t"]
+[gd_scene load_steps=29 format=3 uid="uid://cpoaa68bxhr6t"]
 
 [ext_resource type="Texture2D" uid="uid://5jhg57r0ucxj" path="res://Game/Sprites/Background.png" id="1_vlrx6"]
 [ext_resource type="Texture2D" uid="uid://d3y7rybgn1h5x" path="res://Game/Sprites/Grass.png" id="2_878bf"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Game/Scripts/SetAnimationDefault.gd" id="4_724bc"]
 [ext_resource type="Texture2D" uid="uid://x3nmwa00su81" path="res://Game/Sprites/StalaBottom.png" id="5_11c0x"]
 [ext_resource type="Texture2D" uid="uid://m0jqrrv1exij" path="res://Game/Sprites/StalaTop.png" id="6_n8o07"]
+[ext_resource type="AudioStream" uid="uid://bfb1tg3emqwhj" path="res://Game/Audio/BlockMan.mp3" id="7_igcyi"]
 [ext_resource type="Script" path="res://Game/Scripts/MainCamera.gd" id="7_oels1"]
 [ext_resource type="PackedScene" uid="uid://i1n5kgbsur5f" path="res://Game/OtherScenes/player.tscn" id="8_1teoa"]
 [ext_resource type="Script" path="res://Game/Levels/EventArea.gd" id="9_d0sok"]
@@ -119,6 +120,11 @@ texture_repeat = 2
 position = Vector2(129, -111)
 texture = ExtResource("6_n8o07")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_igcyi")
+volume_db = -5.0
+autoplay = true
+
 [node name="MainCamera" type="Camera2D" parent="."]
 position = Vector2(1782, 0)
 script = ExtResource("7_oels1")
@@ -126,7 +132,6 @@ script = ExtResource("7_oels1")
 [node name="Player" parent="MainCamera" instance=ExtResource("8_1teoa")]
 texture_filter = 1
 speed = 120
-max_bullets = 3
 
 [node name="Camera Boundary" type="CanvasGroup" parent="MainCamera"]
 position = Vector2(132, -2)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ccfha5hedhwxb"]
+[gd_scene load_steps=9 format=3 uid="uid://ccfha5hedhwxb"]
 
 [ext_resource type="Script" path="res://Game/Scripts/EnemyExplosion.gd" id="1_fi6yu"]
 [ext_resource type="Texture2D" uid="uid://cptepfe4npmv0" path="res://Game/Sprites/ExplosionSpriteSheet.png" id="2_wvmno"]
+[ext_resource type="AudioStream" uid="uid://stpek85afm0x" path="res://Game/Audio/explosion.wav" id="3_cc0si"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t7j3f"]
 atlas = ExtResource("2_wvmno")
@@ -54,6 +55,10 @@ frame_progress = 1.0
 position = Vector2(-8, -2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_0xgv3")
+
+[node name="EnemyExplosionAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_cc0si")
+volume_db = -20.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

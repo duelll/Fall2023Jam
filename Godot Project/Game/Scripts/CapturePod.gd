@@ -69,6 +69,7 @@ func get_input():
 func _on_body_entered(body):
 	if (state == CaptureStates.FIRING):
 		if body.is_in_group("capturable_enemies"):
+			$CaptureAudioPlayer.play()
 			body.take_damage(10)
 			if body.is_in_group("bullet_enemy"):
 				state = CaptureStates.RETURNING_BULLET

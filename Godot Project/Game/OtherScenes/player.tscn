@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://i1n5kgbsur5f"]
+[gd_scene load_steps=43 format=3 uid="uid://i1n5kgbsur5f"]
 
 [ext_resource type="Script" path="res://Game/Scripts/PlayerMovement.gd" id="1_jo23b"]
 [ext_resource type="PackedScene" uid="uid://b4355rvbnesde" path="res://Game/OtherScenes/player_bullet.tscn" id="2_pde5s"]
@@ -14,6 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://chv5t26w37ftw" path="res://Game/Sprites/Capsule.png" id="11_iq3td"]
 [ext_resource type="Texture2D" uid="uid://c70omh7nxlhn1" path="res://Game/Sprites/CaptureMissileFlip.png" id="12_30pxm"]
 [ext_resource type="Texture2D" uid="uid://2cufaer4hxmo" path="res://Game/Sprites/CapturedSpreadFlip.png" id="13_jx1qp"]
+[ext_resource type="AudioStream" uid="uid://dhxdair8rv5h5" path="res://Game/Audio/powerUp.wav" id="15_ghoyt"]
+[ext_resource type="AudioStream" uid="uid://dqohei4o4bnwb" path="res://Game/Audio/laserShoot2.wav" id="16_f81e6"]
+[ext_resource type="AudioStream" uid="uid://stpek85afm0x" path="res://Game/Audio/explosion.wav" id="17_xrcc4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j6kxe"]
 atlas = ExtResource("3_5gqmd")
@@ -264,13 +267,25 @@ wait_time = 0.5
 [node name="BulletSpawner" type="Marker2D" parent="CapturePod"]
 position = Vector2(14, 0)
 
+[node name="CaptureAudioPlayer" type="AudioStreamPlayer" parent="CapturePod"]
+stream = ExtResource("15_ghoyt")
+volume_db = -20.0
+
 [node name="PodShotLimitArea" type="Area2D" parent="." groups=["pod_limit"]]
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PodShotLimitArea"]
-position = Vector2(51, 12)
+position = Vector2(63, 12)
 shape = SubResource("RectangleShape2D_h5il3")
+
+[node name="ShootAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_f81e6")
+volume_db = -10.0
+
+[node name="DeathAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_xrcc4")
+volume_db = -5.0
 
 [connection signal="area_entered" from="CapturePod" to="CapturePod" method="_on_area_entered" flags=18]
 [connection signal="body_entered" from="CapturePod" to="CapturePod" method="_on_body_entered" flags=18]

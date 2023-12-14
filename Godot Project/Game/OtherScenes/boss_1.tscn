@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://qy2ytr36e25b"]
+[gd_scene load_steps=19 format=3 uid="uid://qy2ytr36e25b"]
 
 [ext_resource type="Script" path="res://Game/Scripts/Boss1.gd" id="1_edg7j"]
 [ext_resource type="Texture2D" uid="uid://bq7ewexagm7lo" path="res://Game/Sprites/Boss.png" id="2_1te0o"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bfj75i0gn5ick" path="res://Game/OtherScenes/enemy_bullet.tscn" id="2_pax7f"]
 [ext_resource type="Texture2D" uid="uid://br8fnqya4gq82" path="res://Game/Sprites/Space_Game_Enemy_Death_Sparks.png" id="3_w67yh"]
 [ext_resource type="Script" path="res://Game/OtherScenes/SetAnimationDefaultRotationLock.gd" id="5_btj4w"]
+[ext_resource type="AudioStream" uid="uid://dkwyv54a5hiin" path="res://Game/Audio/laserShoot.wav" id="7_j86c5"]
+[ext_resource type="AudioStream" uid="uid://stpek85afm0x" path="res://Game/Audio/explosion.wav" id="8_ypsn0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sylvt"]
 size = Vector2(58, 85)
@@ -111,6 +113,13 @@ shape = SubResource("RectangleShape2D_rq4go")
 one_shot = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="ShootAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_j86c5")
+
+[node name="EnemyDeathAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ypsn0")
+volume_db = -10.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

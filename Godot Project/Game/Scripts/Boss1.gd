@@ -42,6 +42,7 @@ func shoot():
 	actually_shoot()
 	
 func actually_shoot():
+	$ShootAudioPlayer.play()
 	for angle in [-1, -0.7, -0.6, -0.5, -0.4, 0.4, 0.5 , 0.6, 0.7, 1]:
 		var inst = enemy_bullet.instantiate()
 		get_tree().current_scene.add_child(inst)
@@ -77,6 +78,7 @@ func take_damage(amount):
 	
 		if (health < 1):
 			if death_processed == false:
+				$EnemyDeathAudioPlayer.play()
 				state = States.DEAD
 				$Area2D.queue_free()
 				$CollisionShape2D.queue_free()

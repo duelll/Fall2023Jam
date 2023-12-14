@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://du8vn3waj17sp"]
+[gd_scene load_steps=29 format=3 uid="uid://du8vn3waj17sp"]
 
 [ext_resource type="Texture2D" uid="uid://5jhg57r0ucxj" path="res://Game/Sprites/Background.png" id="1_rpbm6"]
 [ext_resource type="Texture2D" uid="uid://x3nmwa00su81" path="res://Game/Sprites/StalaBottom.png" id="2_5ps5e"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://qy2ytr36e25b" path="res://Game/OtherScenes/boss_1.tscn" id="17_wr556"]
 [ext_resource type="PackedScene" uid="uid://dr4was1w3x7a1" path="res://Game/OtherScenes/spread_enemy_big.tscn" id="18_0dywr"]
 [ext_resource type="PackedScene" uid="uid://m8govf7lymjr" path="res://Game/OtherScenes/missile_enemy.tscn" id="19_gfsfg"]
+[ext_resource type="AudioStream" uid="uid://bfb1tg3emqwhj" path="res://Game/Audio/BlockMan.mp3" id="20_0niks"]
 [ext_resource type="PackedScene" uid="uid://cvn7og7jcwte1" path="res://Game/OtherScenes/gear.tscn" id="21_2amam"]
 [ext_resource type="PackedScene" uid="uid://gkd8l7udo10q" path="res://Game/OtherScenes/drill_obstacle.tscn" id="23_nfumk"]
 
@@ -119,13 +120,17 @@ texture_repeat = 2
 position = Vector2(129, -111)
 texture = ExtResource("3_h43os")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_0niks")
+volume_db = -5.0
+autoplay = true
+
 [node name="MainCamera" type="Camera2D" parent="."]
 script = ExtResource("4_ap1ai")
 
 [node name="Player" parent="MainCamera" instance=ExtResource("5_je4o6")]
 texture_filter = 1
 speed = 120
-max_bullets = 3
 
 [node name="Camera Boundary" type="CanvasGroup" parent="MainCamera"]
 position = Vector2(132, -2)
